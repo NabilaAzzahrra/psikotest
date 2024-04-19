@@ -4,6 +4,7 @@ import $, { error } from "jquery";
 import axios from 'axios';
 import "../../assets/css/datatables-custom.css";
 
+
 function Upque() {
 
   const [name, setName] = useState('nab')
