@@ -20,20 +20,19 @@ function Registers() {
 
     const [schoolsAPI, setSchoolsAPI] = useState([]);
 
+    const [isInvalid, setIsInvalid] = useState(false);
+
     const navigate = useNavigate();
 
     const handlePhoneChange = (e) => {
         let inputValue = e.target.value;
-
         const numericInput = inputValue.replace(/\D/g, '');
-
         const maxLength = 14;
         const truncatedInput = numericInput.slice(0, maxLength);
 
         let formattedValue = '';
         if (truncatedInput.length > 0) {
             formattedValue = '62';
-
             for (let i = 2; i < truncatedInput.length; i++) {
                 if (i === 2 && truncatedInput[i] !== '8') {
                     formattedValue += '8';
@@ -43,6 +42,7 @@ function Registers() {
             }
         }
 
+        setIsInvalid(truncatedInput.length < 11); // Set state for validation
         setPhoneReg(formattedValue);
     };
 
@@ -90,6 +90,7 @@ function Registers() {
             })
             .catch((error) => {
                 console.log(error);
+                // console.log(error.response.data.message.phone[0])
             });
     }
 
@@ -124,7 +125,8 @@ function Registers() {
                         </div>
                         <div>
                             <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">No. Telpon</label>
-                            <input type="number" id="phone" value={phoneReg} onChange={(e) => setPhoneReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="6281313608558" required />
+                            <input type="number" id="phone" value={phoneReg} onChange={handlePhoneChange} className={`bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 `} placeholder="6281313608558" required />
+                            {isInvalid && <small className="text-red-500 text-sm">Minimal 11 Karakter.</small>}
                         </div>
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
@@ -136,7 +138,7 @@ function Registers() {
                         </div>
                     </div>
                     <div className='space-x-3'>
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-reguler rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center">Daftar</button>
+                        <button type="submit" disabled={isInvalid} className={`text-white bg-blue-700 ${isInvalid ? 'bg-blue-800' : 'hover:bg-blue-800'} focus:ring-4 focus:outline-none focus:ring-blue-300 font-reguler rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center`}>Daftar</button>
                         <a href={`/`} className='text-sm text-gray-700 hover:underline'>
                             <span>Sudah punya akun? </span>
                             <span className='font-medium'>Masuk disini</span>
