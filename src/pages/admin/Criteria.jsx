@@ -11,7 +11,7 @@ function Criteria() {
   const tableRef = useRef(null);
 
   const getType = async () => {
-    await axios.get("http://localhost:3000/types")
+    await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types")
       .then((response) => {
         console.log(response.data);
         setTypes(response.data);
@@ -23,13 +23,13 @@ function Criteria() {
 
   const typeSave = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3000/types", {
+    await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types", {
       jenis_kecerdasan: name,
     })
       .then((response) => {
         alert(response.data.message);
         getType();
-        location.reload();
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
@@ -42,11 +42,11 @@ function Criteria() {
       'Apakah yakin akan di hapus?'
     )
     if (konfirmasi) {
-      await axios.delete(`http://localhost:3000/types/${id}`)
+      await axios.delete(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types/${id}`)
         .then((response) => {
           alert(response.data.message);
           getType();
-          location.reload();
+          navigate('/');
         })
         .catch((error) => {
           console.log(error);
@@ -55,13 +55,13 @@ function Criteria() {
   }
 
   const typeUpdate=async(e)=>{
-    await axios.put(`http://localhost:3000/types/${id}`, {
+    await axios.put(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types/${id}`, {
       name: name,
     })
       .then((response) => {
         alert(response.data.message);
         getType();
-        location.reload();
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
@@ -91,9 +91,9 @@ function Criteria() {
             FORM INPUT JENIS KECERDASAN
           </div>
           <form action="" method="post" onSubmit={typeSave}>
-            <div class="mb-5">
-              <label for="jenis_kecerdasan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kecerdasan</label>
-              <input type="text" id="jenis_kecerdasan" onChange={(e) => setName(e.target.value)} name="jenis_kecerdasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder='Masukkan Jenis Kecerdasan Di sini...' required />
+            <div className="mb-5">
+              <label for="jenis_kecerdasan" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kecerdasan</label>
+              <input type="text" id="jenis_kecerdasan" onChange={(e) => setName(e.target.value)} name="jenis_kecerdasan" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder='Masukkan Jenis Kecerdasan Di sini...' required />
             </div>
             <button type='submit' className='bg-sky-500 w-16 p-2 justify-center items-center hover:bg-sky-600 hover:text-white rounded-md'>
               Submit

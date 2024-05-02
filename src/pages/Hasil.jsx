@@ -1,117 +1,85 @@
 import React, { useState, useEffect } from 'react';
+import Lottie, { LottiePlayer } from "lottie-react";
+import elephantLP3I from "../assets/animations/elephant.json";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import backgroundImage from "../assets/img/bg1.png";
+import { checkTokenExpiration } from '../middlewares/middleware';
 
 const Hasil = ({ userId }) => {
-  const [jenisKecerdasan, setJenisKecerdasan] = useState(null);
-  const [keterangan, setKeterangan] = useState(null);
-  const [userIds, setIds] = useState(null);
-  const [name, setName] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const [user, setUser] = useState({});
+  const [result, setResult] = useState(null);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchHasil = async () => {
-      try {
-        if (!userId) return;
-
-        console.log('Fetching hasil for userId:', userId);
-        const response = await axios.get(`http://localhost:3000/hasils/${userId}`);
-        console.log('Response:', response.data);
-        const { jenis_kecerdasan } = response.data;
-        const { keterangan } = response.data;
-        setJenisKecerdasan(jenis_kecerdasan);
-        setKeterangan(keterangan);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching result:', error.response);
-        setLoading(false);
+  const getUser = async () => {
+    checkTokenExpiration();
+    const token = localStorage.getItem('token');
+    await axios.get(`https://database.politekniklp3i-tasikmalaya.ac.id/api/auth/psikotest/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-    };
+    })
+      .then((response) => {
+        setUser(response.data.user);
+        getResult(response.data.user.id);
+      })
+      .catch((error) => {
+        if (error.response.status == 401) {
+          return navigate('/');
+        } else {
+          console.log(error.response.data.message);
+        }
+      });
+  }
 
-    if (userId) {
-      fetchHasil();
-    }
-  }, [userId]);
+  const getResult = async (id) => {
+    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${id}`)
+      .then((response) => {
+        const data = response.data;
+        if (!data) {
+          return navigate('/home')
+        }
+        setResult(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const logoutFunc = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('bucket');
+    navigate('/');
+  }
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        const response = await axios.get('https://database.politekniklp3i-tasikmalaya.ac.id/api/auth/psikotest/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        console.log('User data:', response.data.user);
-        const user = response.data.user;
-        const { name } = response.data.user;
-        setName(name);
-
-        const userId = user.id;
-
-        const hasilResponse = await axios.get(`http://localhost:3000/hasils/${userId}`);
-        console.log('Hasil data:', hasilResponse.data);
-
-        const { jenis_kecerdasan } = hasilResponse.data;
-        const { keterangan } = hasilResponse.data;
-        const { id_user } = hasilResponse.data;
-        setJenisKecerdasan(jenis_kecerdasan);
-        setKeterangan(keterangan);
-        setIds(id_user);
-        setLoading(false);
-        // window.print();
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      }
-    };
-
     getUser();
+    checkTokenExpiration();
   }, []);
 
   return (
-    <div>
-      <h1 className='bg-black font-bold font-arial text-[40px] justify-center items-center text-white p-6 text-center -mb-[120px]' style={{
-        fontFamily: 'Poppins',
-      }}>Tes Kecerdasan</h1>
-      <div className=' p-10 justify-center flex items-center h-screen' style={{
-        backgroundImage: `url(${backgroundImage})`,
-      }}>
-        <div className='flex flex-col'>
-          <div className='flex justify-center items-center gap-5'>
-            <div className=' font-bold font-arial text-[30px] justify-center items-center text-black p-6 text-center mb-[10px]' style={{
-              fontFamily: 'Poppins',
-            }}>Selamat ya {name}</div>
-            <div className='w-40 h-40 bg-red-500'>
-              FOTO KARAKTER
-            </div>
-          </div>
-          {loading ? (
-            <p>Mengambil hasil...</p>
-          ) : jenisKecerdasan !== null ? (
-            <div style={{
-              fontFamily: 'Poppins',
-            }} className='flex-col flex items-center'>
-              <div className='mt-5 text-[20px]'>Kecerdasan Kamu Adalah...</div>
-              <div className='text-[30px]'>"<span className='font-bold'>{jenisKecerdasan}</span>"</div>
-              <div className='text-[20px] px-10 text-center'>"{keterangan}"</div>
-              <div className=' p-6  w-[500px] '>
-                <div className='flex justify-between gap-5'>
-                  <img src="src/assets/img/logo-lp3i.png" alt='logo lp3i' className='h-10' />
-                  <img src="src/assets/img/tagline-warna.png" alt='logo lp3i' className='h-10' />
+    <section className='bg-sky-500 h-screen flex flex-col justify-center items-center'>
+      <main className='flex flex-col justify-center items-center gap-5'>
+        <Lottie animationData={elephantLP3I} loop={true} className='h-52' />
+        {
+          result ? (
+            <header className='text-center space-y-4'>
+              <div className='space-y-3'>
+                <div className='inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
+                  <h2 className='text-2xl text-white uppercase font-bold'>{result.jenis_kecerdasan}</h2>
+                  <p className='text-sm text-white'>Selamat kepada saudara/i <span className='underline'>{user.name}</span></p>
                 </div>
               </div>
-            </div>
+              <button type="button" onClick={logoutFunc} className='bg-sky-700 hover:bg-sky-800 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
+            </header>
           ) : (
-            <p>Data tidak tersedia.</p>
-          )}
-        </div>
-      </div>
-    </div>
+            <p className='text-sm text-white'>Loading..</p>
+          )
+        }
+      </main>
+    </section>
   );
 };
 

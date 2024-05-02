@@ -12,7 +12,7 @@ function Answer() {
   const tableRef = useRef(null);
 
   const getType = async () => {
-    await axios.get("http://localhost:3000/types")
+    await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types")
       .then((response) => {
         // console.log(response.data);
         setTypes(response.data);
@@ -23,7 +23,7 @@ function Answer() {
   }
 
   const getTest = async () => {
-    await axios.get("http://localhost:3000/tests")
+    await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/tests")
       .then((response) => {
         console.log(response.data);
         setTests(response.data);
@@ -35,13 +35,13 @@ function Answer() {
 
   const typeSave = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3000/types", {
+    await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types", {
       jenis_kecerdasan: name,
     })
       .then((response) => {
         alert(response.data.message);
         getType();
-        location.reload();
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
@@ -54,11 +54,11 @@ function Answer() {
       'Apakah yakin akan di hapus?'
     )
     if (konfirmasi) {
-      await axios.delete(`http://localhost:3000/types/${id}`)
+      await axios.delete(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types/${id}`)
         .then((response) => {
           alert(response.data.message);
           getType();
-          location.reload();
+          navigate('/');
         })
         .catch((error) => {
           console.log(error);
@@ -67,13 +67,13 @@ function Answer() {
   }
 
   const typeUpdate=async(e)=>{
-    await axios.put(`http://localhost:3000/types/${id}`, {
+    await axios.put(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types/${id}`, {
       name: name,
     })
       .then((response) => {
         alert(response.data.message);
         getType();
-        location.reload();
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);

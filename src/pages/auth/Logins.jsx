@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import logoLp3i from '../../assets/img/logo-lp3i.png'
+import logoTagline from '../../assets/img/tagline-warna.png'
 import { checkTokenExpiration, forbiddenAccess } from '../../middlewares/middleware';
-import backgroundImage from "../../assets/img/bg1.png";
 
 function Logins() {
     const [email, setEmail] = useState('');
@@ -35,40 +36,32 @@ function Logins() {
         forbiddenAccess();
     }, []);
 
-    const handleRegisterClick = () => {
-        navigate('/register'); // Mengarahkan ke halaman registrasi saat tombol "REGISTER" diklik
-    }
-
     return (
-        <div className='relative'>
-            <div className='bg-white h-screen relative flex flex-col justify-center items-center' style={{
-                backgroundImage: `url(${backgroundImage})`,
-            }}>
-                <div className='bg-white p-6 shadow-xl rounded-t-xl w-[500px] border-b-2 border-gray-400'>
-                    <div className='flex justify-between gap-5'>
-                        <img src="src/assets/img/logo-lp3i.png" alt='logo lp3i' className='h-10' />
-                        <img src="src/assets/img/tagline-warna.png" alt='logo lp3i' className='h-10' />
+        <section className='bg-gray-50 h-screen flex justify-center items-center bg-cover'>
+            <main className='container mx-auto space-y-8 px-5'>
+                <div className='max-w-md mx-auto flex justify-center gap-5'>
+                    <img src={logoLp3i} alt='logo lp3i' className='h-14' />
+                    <img src={logoTagline} alt='logo lp3i' className='h-12' />
+                </div>
+                <form className="max-w-md bg-white border border-gray-100 shadow-lg mx-auto px-8 py-8 rounded-3xl" onSubmit={loginFunc}>
+                    <div className="mb-5">
+                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@email.com" required />
                     </div>
-                </div>
-                <div className='bg-white py-2 px-6 pb-6 shadow-xl rounded-b-xl w-[500px]'>
-                    <form class="w-full mx-auto" onSubmit={loginFunc}>
-                        <div class="mb-2">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Masukkan email di sini...' required />
-                        </div>
-                        <div class="mb-5">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Masukkan password di sini...' required />
-                        </div>
-                        <div className="flex justify-between">
-                            <button type="submit" class=" bg-sky-400 hover:bg-black text-white hover:text-white border-white hover:border-gray-950 border-2 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">MASUK</button>
-                            <button onClick={handleRegisterClick} type="submit" class="bg-yellow-300 hover:bg-black text-black hover:text-white border-white border-2 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">DAFTAR</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
+                    <div className="mb-5">
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                    </div>
+                    <div className='space-x-3'>
+                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-reguler rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center">Masuk</button>
+                        <a href={`/register`} className='text-sm text-gray-700 hover:underline'>
+                            <span>Belum punya akun? </span>
+                            <span className='font-medium'>Daftar disini</span>
+                        </a>
+                    </div>
+                </form>
+            </main>
+        </section>
     )
 }
 

@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import CreatableSelect from "react-select/creatable";
 import axios from 'axios';
 import { checkTokenExpiration, forbiddenAccess } from '../../middlewares/middleware';
-import backgroundImage from "../../assets/img/bg1.png";
-import  "../../assets/css/select-react.css";
+import backgroundImage from "../../assets/img/bg.jpeg";
+import "../../assets/css/select-react.css";
+import logoLp3i from '../../assets/img/logo-lp3i.png'
+import logoTagline from '../../assets/img/tagline-warna.png'
 
 function Registers() {
     const [nameReg, setNameReg] = useState('');
@@ -46,31 +48,31 @@ function Registers() {
 
     const getSchools = async () => {
         await axios
-          .get(
-            `https://database.politekniklp3i-tasikmalaya.ac.id/api/school/getall`
-          )
-          .then((res) => {
-            let bucket = [];
-            let dataSchools = res.data.schools;
-            dataSchools.forEach((data) => {
-              bucket.push({
-                value: data.id,
-                label: data.name,
-              });
+            .get(
+                `https://database.politekniklp3i-tasikmalaya.ac.id/api/school/getall`
+            )
+            .then((res) => {
+                let bucket = [];
+                let dataSchools = res.data.schools;
+                dataSchools.forEach((data) => {
+                    bucket.push({
+                        value: data.id,
+                        label: data.name,
+                    });
+                });
+                setSchoolsAPI(bucket);
+            })
+            .catch((err) => {
+                console.log(err.message);
             });
-            setSchoolsAPI(bucket);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      };
-    
-      const schoolHandle = (selectedOption) => {
+    };
+
+    const schoolHandle = (selectedOption) => {
         if (selectedOption) {
             setSchoolReg(selectedOption.value);
-          setSelectedSchool(selectedOption);
+            setSelectedSchool(selectedOption);
         }
-      };
+    };
 
     const registerFunc = async (e) => {
         e.preventDefault();
@@ -98,57 +100,51 @@ function Registers() {
     }, []);
 
     return (
-        <div className='relative'>
-            <div className='bg-white h-screen relative flex flex-col justify-center items-center' style={{
-                backgroundImage: `url(${backgroundImage})`,
-            }}>
-                <div className='bg-white p-6 shadow-xl rounded-t-xl w-[800px] border-b-2 border-gray-400'>
-                    <div className='flex justify-between gap-5'>
-                        <img src="src/assets/img/logo-lp3i.png" alt='logo lp3i' className='h-10' />
-                        <img src="src/assets/img/tagline-warna.png" alt='logo lp3i' className='h-10' />
+        <section className='bg-gray-50 h-screen flex justify-center items-center bg-cover'>
+            <main className='container mx-auto space-y-8 px-5'>
+                <div className='max-w-md mx-auto flex justify-center gap-5'>
+                    <img src={logoLp3i} alt='logo lp3i' className='h-14' />
+                    <img src={logoTagline} alt='logo lp3i' className='h-12' />
+                </div>
+                <form className="max-w-xl bg-white border border-gray-100 shadow-lg mx-auto px-8 py-8 space-y-5 rounded-3xl" onSubmit={registerFunc}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Nama Lengkap</label>
+                            <input type="text" id="name" value={nameReg} onChange={(e) => setNameReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your name" required />
+                        </div>
+                        <div>
+                            <div>
+                                <label htmlFor="school" className="block mb-2 text-sm font-medium text-gray-900">Sekolah</label>
+                                <CreatableSelect type="text" id="school" styles={{ fontFamily: 'Rubik' }} options={schoolsAPI} value={selectedSchool} onChange={schoolHandle} placeholder='Sekolah' required />
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                            <input type="email" id="email" value={emailReg} onChange={(e) => setEmailReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@email.com" required />
+                        </div>
+                        <div>
+                            <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">No. Telpon</label>
+                            <input type="number" id="phone" value={phoneReg} onChange={(e) => setPhoneReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="6281313608558" required />
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                            <input type="password" id="password" value={passwordReg} onChange={(e) => setPasswordReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                        </div>
+                        <div>
+                            <label htmlFor="passwordConf" className="block mb-2 text-sm font-medium text-gray-900">Konfirmasi Password</label>
+                            <input type="password" id="passwordConf" value={passwordConfReg} onChange={(e) => setPasswordConfReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                        </div>
                     </div>
-                </div>
-                <div className='bg-white py-2 px-6 pb-6 shadow-xl rounded-b-xl w-[800px]'>
-                    <form class="w-full mx-auto" onSubmit={registerFunc}>
-                        <div className="flex gap-5">
-                            <div class="mb-2 w-full">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
-                                <input type="text" id="name" style={{ fontFamily: 'Poppins' }} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={nameReg} onChange={(e) => setNameReg(e.target.value)} placeholder='Masukkan nama lengkap di sini...' required />
-                            </div>
-                            <div class="mb-5 w-full">
-                                <label for="school" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sekolah</label>
-                                <CreatableSelect type="text" id="school" style={{ fontFamily: 'Poppins'}} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" options={schoolsAPI} value={selectedSchool} onChange={schoolHandle} placeholder='Masukkan sekolah di sini...' required />
-                            </div>
-                        </div>
-                        <div className="flex gap-5">
-                            <div class="mb-2 w-full">
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="email" id="email" style={{ fontFamily: 'Poppins' }} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={emailReg} onChange={(e) => setEmailReg(e.target.value)} placeholder='Masukkan email di sini...' required />
-                            </div>
-                            <div class="mb-5 w-full">
-                                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
-                                <input type="number" id="phone" style={{ fontFamily: 'Poppins' }} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={phoneReg} onChange={handlePhoneChange} placeholder='Masukkan phone di sini...' required />
-                            </div>
-                        </div>
-                        <div className="flex gap-5">
-                            <div class="mb-2 w-full">
-                                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input type="password" id="password" style={{ fontFamily: 'Poppins' }} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={passwordReg} onChange={(e) => setPasswordReg(e.target.value)} placeholder='Masukkan password di sini...' required />
-                            </div>
-                            <div class="mb-5 w-full">
-                                <label for="konfirmasi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Konfirmasi Password</label>
-                                <input type="password" id="konfirmasi" style={{ fontFamily: 'Poppins' }} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={passwordConfReg} onChange={(e) => setPasswordConfReg(e.target.value)} placeholder='Masukkan Konfirmasi password di sini...' required />
-                            </div>
-                        </div>
-                        <div className="flex justify-between">
-                            <button type="submit" class="bg-yellow-300 hover:bg-black text-black hover:text-white border-white border-2 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">DAFTAR</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-
-        </div >
+                    <div className='space-x-3'>
+                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-reguler rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center">Daftar</button>
+                        <a href={`/`} className='text-sm text-gray-700 hover:underline'>
+                            <span>Sudah punya akun? </span>
+                            <span className='font-medium'>Masuk disini</span>
+                        </a>
+                    </div>
+                </form>
+            </main>
+        </section>
     )
 }
 
