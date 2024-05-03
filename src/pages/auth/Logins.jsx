@@ -32,8 +32,20 @@ function Logins() {
     }
 
     useEffect(() => {
-        checkTokenExpiration();
-        forbiddenAccess();
+        checkTokenExpiration()
+        .then((response) => {
+            window.history.back();
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        forbiddenAccess()
+        .then((response)=> {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }, []);
 
     return (

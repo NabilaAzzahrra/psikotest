@@ -16,38 +16,49 @@ function Question() {
     const navigate = useNavigate();
 
     const getUser = async () => {
-        checkTokenExpiration();
-        const token = localStorage.getItem('token');
-        const decoded = jwtDecode(token);
+        checkTokenExpiration()
+            .then(async (response) => {
+                const token = localStorage.getItem('token');
+                const decoded = jwtDecode(token);
 
-        const userId = decoded.id;
-        const userName = decoded.name;
-        const userEmail = decoded.email;
-        const userPhone = decoded.phone;
-        const userStatus = decoded.status;
+                const userId = decoded.id;
+                const userName = decoded.name;
+                const userEmail = decoded.email;
+                const userPhone = decoded.phone;
+                const userStatus = decoded.status;
 
-        const data = {
-            id: userId,
-            name: userName,
-            email: userEmail,
-            phone: userPhone,
-            status: userStatus
-        }
+                const data = {
+                    id: userId,
+                    name: userName,
+                    email: userEmail,
+                    phone: userPhone,
+                    status: userStatus
+                }
 
-        setUser(data);
-        getResult(data);
+                setUser(data);
+                getResult(data);
+            })
+            .catch((error) => {
+                navigate('/')
+            });
     }
 
     const getQuestions = async () => {
-        checkTokenExpiration();
-        await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions")
-            .then((response) => {
-                setQuestions(response.data);
+        checkTokenExpiration()
+            .then(async (response) => {
                 console.log(response);
+                await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions")
+                    .then((response) => {
+                        setQuestions(response.data);
+                    })
+                    .catch((error) => {
+                        navigate('/');
+                    });
             })
             .catch((error) => {
-                console.log(error);
+                navigate('/')
             });
+
     }
 
     const getResult = async (data) => {
@@ -64,10 +75,16 @@ function Question() {
     }
 
     useEffect(() => {
+        checkTokenExpiration()
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                navigate('/')
+            });
         getUser();
         getQuestions();
         bucketQuestion();
-        checkTokenExpiration();
     }, []);
 
     useEffect(() => {
@@ -151,7 +168,7 @@ function Question() {
                 <h2 className='text-md md:text-4xl font-bold text-white text-center'>TES KECERDASAN GANDA</h2>
             </header>
             <section className='flex flex-col justify-center items-center gap-5'>
-                {loading && 
+                {loading &&
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
                         <div className="px-5 py-2 text-xs font-medium leading-none text-center text-blue-800 bg-blue-200 rounded-full animate-pulse">Menyimpan jawaban...</div>
                     </div>

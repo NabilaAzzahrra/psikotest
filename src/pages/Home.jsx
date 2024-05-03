@@ -16,26 +16,31 @@ function Home() {
     const navigate = useNavigate();
 
     const getUser = async () => {
-        checkTokenExpiration();
-        const token = localStorage.getItem('token');
-        const decoded = jwtDecode(token);
+        checkTokenExpiration()
+            .then((response) => {
+                const token = localStorage.getItem('token');
+                const decoded = jwtDecode(token);
 
-        const userId = decoded.id;
-        const userName = decoded.name;
-        const userEmail = decoded.email;
-        const userPhone = decoded.phone;
-        const userStatus = decoded.status;
+                const userId = decoded.id;
+                const userName = decoded.name;
+                const userEmail = decoded.email;
+                const userPhone = decoded.phone;
+                const userStatus = decoded.status;
 
-        const data = {
-            id: userId,
-            name: userName,
-            email: userEmail,
-            phone: userPhone,
-            status: userStatus
-        }
+                const data = {
+                    id: userId,
+                    name: userName,
+                    email: userEmail,
+                    phone: userPhone,
+                    status: userStatus
+                }
 
-        setUser(data);
-        getResult(data);
+                setUser(data);
+                getResult(data);
+            })
+            .catch((error) => {
+                navigate('/');
+            });
     }
 
     const getResult = async (data) => {
@@ -61,7 +66,13 @@ function Home() {
 
     useEffect(() => {
         getUser();
-        checkTokenExpiration();
+        checkTokenExpiration()
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                navigate('/')
+            });
     }, []);
 
     return (
