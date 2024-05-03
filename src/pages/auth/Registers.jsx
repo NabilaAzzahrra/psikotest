@@ -11,6 +11,7 @@ function Registers() {
     const [nameReg, setNameReg] = useState('');
     const [emailReg, setEmailReg] = useState('');
     const [schoolReg, setSchoolReg] = useState('');
+    const [classReg, setClassReg] = useState('');
     const [phoneReg, setPhoneReg] = useState('');
     const [passwordReg, setPasswordReg] = useState('');
     const [passwordConfReg, setPasswordConfReg] = useState('');
@@ -75,14 +76,16 @@ function Registers() {
 
     const registerFunc = async (e) => {
         e.preventDefault();
-        await axios.post(`https://database.politekniklp3i-tasikmalaya.ac.id/api/auth/psikotest/register`, {
+        const data = {
             name: nameReg,
             school: schoolReg,
+            classes: classReg,
             email: emailReg,
             phone: phoneReg,
             password: passwordReg,
             password_confirmation: passwordConfReg
-        })
+        }
+        await axios.post(`https://database.politekniklp3i-tasikmalaya.ac.id/api/auth/psikotest/register`, data)
             .then((response) => {
                 alert(response.data.message)
                 navigate('/')
@@ -106,10 +109,20 @@ function Registers() {
                     <img src={logoTagline} alt='logo lp3i' className='h-12' />
                 </div>
                 <form className="max-w-xl bg-white border border-gray-100 shadow-lg mx-auto px-8 py-8 space-y-5 rounded-3xl" onSubmit={registerFunc}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1">
                         <div>
                             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Nama Lengkap</label>
-                            <input type="text" id="name" value={nameReg} onChange={(e) => setNameReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your name" required />
+                            <input type="text" id="name" value={nameReg} onChange={(e) => setNameReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Isi nama lengkap" required />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label htmlFor="classes" className="block mb-2 text-sm font-medium text-gray-900">Kelas</label>
+                            <select id="clasess" onChange={(e) => setClassReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" data-placeholder="Nabil" required>
+                                <option value="">Pilih</option>
+                                <option value="IPA 1">IPA 1</option>
+                                <option value="IPS 1">IPS 1</option>
+                            </select>
                         </div>
                         <div>
                             <div>
