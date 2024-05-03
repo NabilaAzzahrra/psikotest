@@ -16,6 +16,13 @@ function Registers() {
     const [passwordReg, setPasswordReg] = useState('');
     const [passwordConfReg, setPasswordConfReg] = useState('');
 
+    const [errorsName, setErrorsName] = useState([]);
+    const [errorsSchool, setErrorsSchool] = useState([]);
+    const [errorsClasses, setErrorsClasses] = useState([]);
+    const [errorsEmail, setErrorsEmail] = useState([]);
+    const [errorsPhone, setErrorsPhone] = useState([]);
+    const [errorsPassword, setErrorsPassword] = useState([]);
+
     const [selectedSchool, setSelectedSchool] = useState(null);
 
     const [schoolsAPI, setSchoolsAPI] = useState([]);
@@ -91,7 +98,14 @@ function Registers() {
                 navigate('/')
             })
             .catch((error) => {
-                console.log(error);
+                const errorCustom = error.response.data.message;
+                setErrorsName(errorCustom.name);
+                setErrorsSchool(errorCustom.school);
+                setErrorsClasses(errorCustom.classes);
+                setErrorsEmail(errorCustom.email);
+                setErrorsPhone(errorCustom.phone);
+                setErrorsPassword(errorCustom.password);
+                console.log(error.response.data.message);
             });
     }
 
@@ -104,15 +118,16 @@ function Registers() {
     return (
         <section className='bg-gray-50 h-screen flex justify-center items-center bg-cover'>
             <main className='container mx-auto space-y-8 px-5'>
-                <div className='max-w-md mx-auto flex justify-center gap-5'>
+                <div className='max-w-xl mx-auto flex justify-center gap-5'>
                     <img src={logoLp3i} alt='logo lp3i' className='h-14' />
                     <img src={logoTagline} alt='logo lp3i' className='h-12' />
                 </div>
-                <form className="max-w-xl bg-white border border-gray-100 shadow-lg mx-auto px-8 py-8 space-y-5 rounded-3xl" onSubmit={registerFunc}>
+                <form className="max-w-2xl bg-white border border-gray-100 shadow-lg mx-auto px-8 py-8 space-y-5 rounded-3xl" onSubmit={registerFunc}>
                     <div className="grid grid-cols-1">
                         <div>
                             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Nama Lengkap</label>
                             <input type="text" id="name" value={nameReg} onChange={(e) => setNameReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Isi nama lengkap" required />
+                            <small className='text-xs text-red-600'>{errorsName}</small>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -123,21 +138,25 @@ function Registers() {
                                 <option value="IPA 1">IPA 1</option>
                                 <option value="IPS 1">IPS 1</option>
                             </select>
+                            <small className='text-xs text-red-600'>{errorsClasses}</small>
                         </div>
                         <div>
                             <div>
                                 <label htmlFor="school" className="block mb-2 text-sm font-medium text-gray-900">Sekolah</label>
                                 <CreatableSelect type="text" id="school" styles={{ fontFamily: 'Rubik' }} options={schoolsAPI} value={selectedSchool} onChange={schoolHandle} placeholder='Sekolah' required />
+                                <small className='text-xs text-red-600'>{errorsSchool}</small>
                             </div>
                         </div>
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
                             <input type="email" id="email" value={emailReg} onChange={(e) => setEmailReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@email.com" required />
+                            <small className='text-xs text-red-600'>{errorsEmail}</small>
                         </div>
                         <div>
                             <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">No. Telpon</label>
                             <input type="number" id="phone" value={phoneReg} onChange={handlePhoneChange} className={`bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 `} placeholder="6281313608558" required />
                             {isInvalid && <small className="text-red-500 text-sm">Minimal 11 Karakter.</small>}
+                            <small className='text-xs text-red-600'>{errorsPhone}</small>
                         </div>
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
@@ -146,6 +165,7 @@ function Registers() {
                         <div>
                             <label htmlFor="passwordConf" className="block mb-2 text-sm font-medium text-gray-900">Konfirmasi Password</label>
                             <input type="password" id="passwordConf" value={passwordConfReg} onChange={(e) => setPasswordConfReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                            <small className='text-xs text-red-600'>{errorsPassword}</small>
                         </div>
                     </div>
                     <div className='space-x-3'>
