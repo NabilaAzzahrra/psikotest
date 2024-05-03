@@ -79,7 +79,7 @@ const Hasil = () => {
           result ? (
             <header className='text-center space-y-4 mx-5'>
               <div className='space-y-3'>
-                <div className='w-full md:w-1/2 inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
+                <div className='max-w-xl inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
                   <h2 className='text-2xl text-white uppercase font-bold'>{result.jenis_kecerdasan}</h2>
                   <p className='text-sm text-white'>{result.keterangan}</p>
                   <hr />
