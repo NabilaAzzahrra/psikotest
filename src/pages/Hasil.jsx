@@ -69,6 +69,8 @@ const Hasil = ({ userId }) => {
               <div className='space-y-3'>
                 <div className='inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
                   <h2 className='text-2xl text-white uppercase font-bold'>{result.jenis_kecerdasan}</h2>
+                  <p className='text-sm text-white'>{result.keterangan}</p>
+                  <hr />
                   <p className='text-sm text-white'>Selamat kepada saudara/i <span className='underline'>{user.name}</span></p>
                 </div>
               </div>
