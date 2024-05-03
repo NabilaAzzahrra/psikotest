@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { checkTokenExpiration } from '../middlewares/middleware';
+import { jwtDecode } from "jwt-decode";
 import Lottie from "lottie-react";
 import questionImage from "../assets/img/question.json";
 import { useNavigate } from 'react-router-dom';
@@ -17,22 +18,24 @@ function Question() {
     const getUser = async () => {
         checkTokenExpiration();
         const token = localStorage.getItem('token');
-        await axios.get(`https://database.politekniklp3i-tasikmalaya.ac.id/api/auth/psikotest/profile`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((response) => {
-                setUser(response.data.user);
-                getResult(response.data.user.id)
-            })
-            .catch((error) => {
-                if (error.response.status == 401) {
-                    return navigate('/');
-                } else {
-                    console.log(error.response.data.message);
-                }
-            });
+        const decoded = jwtDecode(token);
+
+        const userId = decoded.id;
+        const userName = decoded.name;
+        const userEmail = decoded.email;
+        const userPhone = decoded.phone;
+        const userStatus = decoded.status;
+
+        const data = {
+            id: userId,
+            name: userName,
+            email: userEmail,
+            phone: userPhone,
+            status: userStatus
+        }
+
+        setUser(data);
+        getResult(data);
     }
 
     const getQuestions = async () => {
@@ -47,8 +50,8 @@ function Question() {
             });
     }
 
-    const getResult = async (id) => {
-        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${id}`)
+    const getResult = async (data) => {
+        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
             .then((response) => {
                 const data = response.data;
                 if (data) {
@@ -65,7 +68,6 @@ function Question() {
         getQuestions();
         bucketQuestion();
         checkTokenExpiration();
-        getResult();
     }, []);
 
     useEffect(() => {

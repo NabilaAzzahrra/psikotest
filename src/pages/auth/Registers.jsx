@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import CreatableSelect from "react-select/creatable";
 import axios from 'axios';
 import { checkTokenExpiration, forbiddenAccess } from '../../middlewares/middleware';
-import backgroundImage from "../../assets/img/bg.jpeg";
 import "../../assets/css/select-react.css";
 import logoLp3i from '../../assets/img/logo-lp3i.png'
 import logoTagline from '../../assets/img/tagline-warna.png'
@@ -90,7 +89,6 @@ function Registers() {
             })
             .catch((error) => {
                 console.log(error);
-                // console.log(error.response.data.message.phone[0])
             });
     }
 

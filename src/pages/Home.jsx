@@ -4,6 +4,7 @@ import awanLp3i from "../assets/img/awan-lp3i.json";
 import logoLp3i from '../assets/img/logo-lp3i.png'
 import logoTagline from '../assets/img/tagline-warna.png'
 import { checkTokenExpiration } from '../middlewares/middleware';
+import { jwtDecode } from "jwt-decode";
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
@@ -17,26 +18,28 @@ function Home() {
     const getUser = async () => {
         checkTokenExpiration();
         const token = localStorage.getItem('token');
-        await axios.get(`https://database.politekniklp3i-tasikmalaya.ac.id/api/auth/psikotest/profile`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((response) => {
-                setUser(response.data.user);
-                getResult(response.data.user.id);
-            })
-            .catch((error) => {
-                if (error.response.status == 401) {
-                    return navigate('/');
-                } else {
-                    console.log(error.response.data.message);
-                }
-            });
+        const decoded = jwtDecode(token);
+
+        const userId = decoded.id;
+        const userName = decoded.name;
+        const userEmail = decoded.email;
+        const userPhone = decoded.phone;
+        const userStatus = decoded.status;
+
+        const data = {
+            id: userId,
+            name: userName,
+            email: userEmail,
+            phone: userPhone,
+            status: userStatus
+        }
+
+        setUser(data);
+        getResult(data);
     }
 
-    const getResult = async (id) => {
-        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${id}`)
+    const getResult = async (data) => {
+        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
             .then((response) => {
                 setResult(response.data);
                 setError(false);
