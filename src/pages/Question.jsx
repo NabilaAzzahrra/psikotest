@@ -214,7 +214,7 @@ function Question() {
                         </label>
                     </div>
                     <div>
-                        <p className='text-xs text-center px-6'>Diterjemahkan dan digunakan hanya dilingkungan sendiri, sumber asli dari businessballs.com</p>
+                        <p className='text-xs text-center px-6 xl:text-md'>Diterjemahkan dan digunakan hanya dilingkungan sendiri, sumber asli dari businessballs.com</p>
                     </div>
                 </div>
             </section>
