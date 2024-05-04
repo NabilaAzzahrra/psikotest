@@ -13,7 +13,7 @@ function Upque() {
   const tableRef = useRef(null);
 
   const getQuest = async () => {
-    await axios.get("http://localhost:8001/questions")
+    await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions")
       .then((response) => {
         console.log(response.data);
         setQuest(response.data);
@@ -25,7 +25,7 @@ function Upque() {
 
   const questSave = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8001/questions", {
+    await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions", {
       id_type: name,
       question: pertanyaan,
     })
@@ -46,7 +46,7 @@ function Upque() {
       'Apakah yakin akan di hapus?'
     )
     if (konfirmasi) {
-      await axios.delete(`http://localhost:8001/questions/${id}`)
+      await axios.delete(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions/${id}`)
         .then((response) => {
           alert(response.data.message);
           getQuest();
@@ -59,7 +59,7 @@ function Upque() {
   }
 
   const questUpdate=async(e)=>{
-    await axios.put(`http://localhost:8001/questions/${id}`, {
+    await axios.put(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions/${id}`, {
       id_type: name,
       question: pertanyaan,
     })
