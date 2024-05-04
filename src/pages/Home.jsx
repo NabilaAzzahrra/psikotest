@@ -122,7 +122,7 @@ function Home() {
                     <h2 className='uppercase font-bold text-3xl'>
                         Tes Kecerdasan Ganda
                     </h2>
-                    <p className='text-sm'>Kita akan menjadi paling bahagia dan sukses ketika belajar, berkembang, dan bekerja dengan cara yang paling baik memanfaatkan kecerdasan alami kita (dengan kata lain, kekuatan, gaya, dan jenis otak kita masing-masing). Dengan demikian, indikator ini membantu Anda menetapkan fokus pada jenis pembelajaran dan pekerjaan yang paling membahagiakan dan paling bermanfaat bagi Anda sendiri.</p>
+                    <p className='text-sm'>Puncak kebahagiaan dan kesuksesan kita tercapai saat kita memanfaatkan kecerdasan alami kita secara optimal. Fokuslah pada pembelajaran dan pekerjaan yang sesuai dengan kekuatan, gaya, dan jenis otak kita sendiri.</p>
                 </div>
                 {
                     loading ? (
