@@ -25,6 +25,8 @@ function Home() {
                 const userName = decoded.name;
                 const userEmail = decoded.email;
                 const userPhone = decoded.phone;
+                const userSchool = decoded.school ?? 'Tidak diketahui';
+                const userClasses = decoded.classes ?? 'Tidak diketahui';
                 const userStatus = decoded.status;
 
                 const data = {
@@ -32,6 +34,8 @@ function Home() {
                     name: userName,
                     email: userEmail,
                     phone: userPhone,
+                    school: userSchool,
+                    classes: userClasses,
                     status: userStatus
                 }
 
@@ -62,6 +66,35 @@ function Home() {
         localStorage.removeItem('token');
         localStorage.removeItem('bucket');
         navigate('/');
+    }
+
+    const startTest = async () => {
+        try {
+            const responseUserExist = await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/users/${user.id}`);
+            console.log(responseUserExist);
+            if (responseUserExist.data) {
+                navigate('/question')
+            } else {
+                const data = {
+                    id_user: user.id,
+                    name: user.name,
+                    email: user.email,
+                    phone: user.phone,
+                    school: user.school,
+                    classes: user.classes,
+                }
+                await axios.post(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/users`, data)
+                    .then((response) => {
+                        navigate('/question');
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     useEffect(() => {
@@ -118,9 +151,9 @@ function Home() {
                                     <button type="button" onClick={logoutFunc} className='bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
                                 </div>
                             ) : (
-                                <a href={`/question`} className='border-2 border-gray-900 text-base uppercase font-bold hover:bg-gray-900 hover:text-white px-5 py-2'>
+                                <button type="button" onClick={startTest} className='border-2 border-gray-900 text-base uppercase font-bold hover:bg-gray-900 hover:text-white px-5 py-2'>
                                     <span>Mulai</span>
-                                </a>
+                                </button>
                             )
                         )
                     )
