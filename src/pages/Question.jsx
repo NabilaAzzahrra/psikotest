@@ -47,7 +47,7 @@ function Question() {
         checkTokenExpiration()
             .then(async (response) => {
                 console.log(response);
-                await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions")
+                await axios.get("http://localhost:8001/questions")
                     .then((response) => {
                         setQuestions(response.data);
                     })
@@ -62,7 +62,7 @@ function Question() {
     }
 
     const getResult = async (data) => {
-        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
+        await axios.get(`http://localhost:8001/hasils/${data.id}`)
             .then((response) => {
                 const data = response.data;
                 if (data) {
@@ -146,7 +146,7 @@ function Question() {
         };
         bucket.push(data);
         localStorage.setItem('bucket', JSON.stringify(bucket));
-        await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/tests", {
+        await axios.post("http://localhost:8001/tests", {
             answers: bucket,
         })
             .then((response) => {
@@ -174,7 +174,7 @@ function Question() {
                     </div>
                 }
                 <div className='max-w-5xl space-y-1 md:space-y-5'>
-                    <div className='text-xl font-bold rounded-3xl flex justify-center'>
+                    <div className='text-md font-bold rounded-3xl flex justify-center'>
                         <div className="flex items-center">
                             <Lottie animationData={questionImage} loop={true} className='h-40' />
                             QUESTION {currentQuestion + 1} / 70
@@ -186,34 +186,36 @@ function Question() {
                     <div className='flex flex-col md:flex-row md:items-center justify-center gap-5 md:gap-10 p-4'>
                         <label>
                             <input type="radio" name="option" value="4" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 1} />
-                            <div className='flex justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
                                 Gue Banget
                                 <div className='text-xl rounded-full'>🤙</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="3" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 2} />
-                            <div className='flex justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
                                 Pas di Gue Sih
                                 <div className='text-xl rounded-full'>👌</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="2" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 3} />
-                            <div className='flex justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
                                 Bukan Gue
                                 <div className='text-xl rounded-full'>👋</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="1" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 4} />
-                            <div className='flex justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
                                 Bukan Gue Banget
                                 <div className='text-xl rounded-full'>👎</div>
                             </div>
                         </label>
                     </div>
-
+                    <div>
+                        <p className='text-xs text-center px-6'>Diterjemahkan dan digunakan hanya dilingkungan sendiri, sumber asli dari businessballs.com</p>
+                    </div>
                 </div>
             </section>
             <footer className='hidden md:block'>
