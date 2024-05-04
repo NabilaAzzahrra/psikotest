@@ -127,7 +127,7 @@ function Question() {
             setCurrentQuestion(currentQuestion + 1);
             setTimeout(() => {
                 setLoading(false);
-            }, 10);
+            }, 1000);
         }
     };
 
