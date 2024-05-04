@@ -111,18 +111,18 @@ function Home() {
     return (
         <section className='bg-white h-screen relative bg-cover'>
             <main className='container mx-auto flex flex-col justify-center items-center h-screen px-5 gap-5'>
-                <div className='flex justify-between gap-5 mb-10'>
+                <div className='flex justify-between gap-5'>
                     <img src={logoLp3i} alt='logo lp3i' className='h-14' />
                     <img src={logoTagline} alt='logo lp3i' className='h-12' />
                 </div>
                 <div className=''>
                     <Lottie animationData={awanLp3i} loop={true} className='h-52' />
                 </div>
-                <div className='text-center space-y-5'>
-                    <h2 className='uppercase font-bold text-5xl'>
+                <div className='text-center space-y-2'>
+                    <h2 className='uppercase font-bold text-3xl'>
                         Tes Kecerdasan Ganda
                     </h2>
-                    <p className='text-base'>Kita akan menjadi paling bahagia dan sukses ketika belajar, berkembang, dan bekerja dengan cara yang paling baik memanfaatkan kecerdasan alami kita (dengan kata lain, kekuatan, gaya, dan jenis otak kita masing-masing). Dengan demikian, indikator ini membantu Anda menetapkan fokus pada jenis pembelajaran dan pekerjaan yang paling membahagiakan dan paling bermanfaat bagi Anda sendiri.</p>
+                    <p className='text-sm'>Kita akan menjadi paling bahagia dan sukses ketika belajar, berkembang, dan bekerja dengan cara yang paling baik memanfaatkan kecerdasan alami kita (dengan kata lain, kekuatan, gaya, dan jenis otak kita masing-masing). Dengan demikian, indikator ini membantu Anda menetapkan fokus pada jenis pembelajaran dan pekerjaan yang paling membahagiakan dan paling bermanfaat bagi Anda sendiri.</p>
                 </div>
                 {
                     loading ? (
@@ -151,7 +151,7 @@ function Home() {
                                     <button type="button" onClick={logoutFunc} className='bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
                                 </div>
                             ) : (
-                                <button type="button" onClick={startTest} className='border-2 border-gray-900 text-base uppercase font-bold hover:bg-gray-900 hover:text-white px-5 py-2'>
+                                <button type="button" onClick={startTest} className='border-2 border-gray-900 text-sm uppercase font-bold hover:bg-gray-900 hover:text-white px-3 py-1'>
                                     <span>Mulai</span>
                                 </button>
                             )

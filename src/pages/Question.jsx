@@ -164,8 +164,8 @@ function Question() {
 
     return (
         <main className='flex flex-col justify-between md:h-screen'>
-            <header className='bg-black p-6'>
-                <h2 className='text-md md:text-4xl font-bold text-white text-center'>TES KECERDASAN GANDA</h2>
+            <header className='bg-black p-3'>
+                <h2 className='text-md md:text-2xl font-bold text-white text-center'>TES KECERDASAN GANDA</h2>
             </header>
             <section className='flex flex-col justify-center items-center gap-5'>
                 {loading &&
@@ -186,28 +186,28 @@ function Question() {
                     <div className='flex flex-col md:flex-row md:items-center justify-center gap-5 md:gap-10 p-4'>
                         <label>
                             <input type="radio" name="option" value="4" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 1} />
-                            <div className='flex justify-center bg-white px-5 py-4 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className='flex justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
                                 Gue Banget
                                 <div className='text-xl rounded-full'>🤙</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="3" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 2} />
-                            <div className='flex justify-center bg-white px-5 py-4 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className='flex justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
                                 Pas di Gue Sih
                                 <div className='text-xl rounded-full'>👌</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="2" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 3} />
-                            <div className='flex justify-center bg-white px-5 py-4 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className='flex justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
                                 Bukan Gue
                                 <div className='text-xl rounded-full'>👋</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="1" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 4} />
-                            <div className='flex justify-center bg-white px-5 py-4 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className='flex justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
                                 Bukan Gue Banget
                                 <div className='text-xl rounded-full'>👎</div>
                             </div>
