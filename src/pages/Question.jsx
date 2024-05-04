@@ -214,7 +214,7 @@ function Question() {
                         </label>
                     </div>
                     <div>
-                        <p className='text-xs text-center px-6 xl:text-md'>Diterjemahkan dan digunakan hanya dilingkungan sendiri, sumber asli dari businessballs.com</p>
+                        <p className='text-xs text-center px-6 xl:text-md'>© A Chapman and V Chislett MSc 2005, diambil dari <span className='italic'>Gardner's Multiple Intelligences Model</span>. From <span className='italic'>www.businessballs.com</span>. Tidak untuk dijual dan dicetak. Penulis tidak bertanggung-jawab atas pelanggaran hal-hal tersebut.</p>
                     </div>
                 </div>
             </section>
