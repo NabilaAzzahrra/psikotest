@@ -177,7 +177,7 @@ function Question() {
                     <div className='text-md font-bold rounded-3xl flex justify-center'>
                         <div className="flex items-center">
                             <Lottie animationData={questionImage} loop={true} className='h-40' />
-                            QUESTION {currentQuestion + 1} / 70
+                            QUESTION {currentQuestion + 1} / 80
                         </div>
                     </div>
                     <div className='bg-gray-100 p-4 mx-5 rounded-xl'>
