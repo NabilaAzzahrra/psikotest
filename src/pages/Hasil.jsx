@@ -84,10 +84,15 @@ const Hasil = () => {
                   <p className='text-sm text-white'>
                     {result.keterangan.split(/([:.])/).map((sentence, index, array) => (
                       <span key={index}>
-                        <b>{sentence.trim()}</b>
+                        {index % 2 === 0 ? (
+                          <span>{sentence.trim()}</span>
+                        ) : (
+                          <b>{sentence.trim()}</b>
+                        )}
                         {(index + 1) % 2 === 0 ? <br /> : null}
                       </span>
                     ))}
+
                   </p>
                   <hr />
                   <p className='text-sm text-white'>Selamat kepada saudara/i <span className='underline'>{user.name}</span></p>
