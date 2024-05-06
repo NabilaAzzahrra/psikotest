@@ -84,7 +84,7 @@ const Hasil = () => {
                   <p className='text-sm text-white'>
                     {result.keterangan.split(/([:.])/).map((sentence, index, array) => (
                       <span key={index}>
-                        {sentence.trim()}
+                        <b>{sentence.trim()}</b>
                         {(index + 1) % 2 === 0 ? <br /> : null}
                       </span>
                     ))}
