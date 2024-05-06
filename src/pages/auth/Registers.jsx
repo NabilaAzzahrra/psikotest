@@ -147,8 +147,19 @@ function Registers() {
                             <label htmlFor="classes" className="block mb-2 text-sm font-medium text-gray-900">Kelas</label>
                             <select id="clasess" onChange={(e) => setClassReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" data-placeholder="Nabil" required>
                                 <option value="">Pilih</option>
-                                <option value="IPA 1">IPA 1</option>
-                                <option value="IPS 1">IPS 1</option>
+                                <option value="X1">X1</option>
+                                <option value="X2">X2</option>
+                                <option value="X3">X3</option>
+                                <option value="X4">X4</option>
+                                <option value="X5">X5</option>
+                                <option value="X6">X6</option>
+                                <option value="X7">X7</option>
+                                <option value="X8">X8</option>
+                                <option value="X9">X9</option>
+                                <option value="X10">X10</option>
+                                <option value="X11">X11</option>
+                                <option value="X12">X12</option>
+                                <option value="X13">X13</option>
                             </select>
                             <small className='text-xs text-red-600'>{errorsClasses}</small>
                         </div>
