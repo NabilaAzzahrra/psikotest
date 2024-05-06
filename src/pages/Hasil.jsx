@@ -85,9 +85,11 @@ const Hasil = () => {
                     {result.keterangan.split(/([:.])/).map((sentence, index, array) => (
                       <span key={index}>
                         {index % 4 === 0 ? (
-                          <b className='text-orange-400'>{sentence.trim()}</b>
+                          <b className='text-amber-400 text-[15px]'>{sentence.trim()}</b>
                         ) : (
-                          <span>{sentence.trim()}</span>
+                          sentence.trim() !== ':' ? (
+                            <span>{sentence.trim()}</span>
+                          ) : null
                         )}
                         {(index + 1) % 2 === 0 ? <br /> : null}
                       </span>
