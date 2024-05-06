@@ -82,10 +82,10 @@ const Hasil = () => {
                 <div className='max-w-xl inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
                   <h2 className='text-2xl text-white uppercase font-bold'>{result.jenis_kecerdasan}</h2>
                   <p className='text-sm text-white'>
-                    {result.keterangan.split(':').map((sentence, index) => (
+                    {result.keterangan.split(':').map((sentence, index, array) => (
                       <span key={index}>
-                        {index > 0 && <br />} 
-                        {sentence.trim()} 
+                        {sentence.trim()}{index !== array.length - 1 ? ':' : null}
+                        <br />
                       </span>
                     ))}
                   </p>
