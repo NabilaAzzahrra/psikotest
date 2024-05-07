@@ -145,7 +145,11 @@ function Home() {
                                         </p>
                                         <p>
                                             <span>Jenis Kecerdasan Anda: </span>
-                                            <span className='font-bold underline'>{result.jenis_kecerdasan}</span>
+                                            <span className='font-bold underline'>
+                                                <span>{result[0].jenis_kecerdasan}</span>
+                                                <span> & </span>
+                                                <span>{result[1].jenis_kecerdasan}</span>
+                                            </span>
                                         </p>
                                     </div>
                                     <button type="button" onClick={logoutFunc} className='bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>

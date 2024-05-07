@@ -115,6 +115,7 @@ function Question() {
         if (currentQuestion + 1 === questionLength) {
             handleFinish(answer);
         } else {
+            console.log(questions);
             let data = {
                 question: currentQuestion + 1,
                 id_question: questions[currentQuestion].id,

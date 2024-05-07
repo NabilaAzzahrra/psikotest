@@ -72,32 +72,49 @@ const Hasil = () => {
   }, []);
 
   return (
-    <section className='bg-sky-500 h-screen flex flex-col justify-center items-center'>
+    <section className='bg-sky-500 flex flex-col justify-center items-center md:h-screen py-10'>
       <main className='flex flex-col justify-center items-center gap-5'>
         <Lottie animationData={elephantLP3I} loop={true} className='h-52' />
         {
           result ? (
             <header className='text-center space-y-4 mx-5'>
               <div className='space-y-3'>
-                <div className='max-w-xl inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
-                  <h2 className='text-2xl text-white uppercase font-bold'>{result.jenis_kecerdasan}</h2>
-                  <p className='text-sm text-white'>
-                    {result.keterangan.split(/([:.])/).map((sentence, index, array) => (
-                      <span key={index}>
-                        {index % 4 === 0 ? (
-                          <b className='text-amber-400 text-[15px]'>{sentence.trim()}</b>
-                        ) : (
-                          sentence.trim() !== ':' ? (
-                            <span>{sentence.trim()}</span>
-                          ) : null
-                        )}
-                        {(index + 1) % 2 === 0 ? <br /> : null}
-                      </span>
-                    ))}
-                  </p>
-                  <hr />
-                  <p className='text-sm text-white'>Selamat kepada saudara/i <span className='underline'>{user.name}</span></p>
-                </div>
+                <section className='max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-5'>
+                  <div className='inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
+                    <h2 className='text-2xl text-white uppercase font-bold'>{result[0].jenis_kecerdasan}</h2>
+                    <p className='text-sm text-white'>
+                      {result[0].keterangan.split(/([:.])/).map((sentence, index, array) => (
+                        <span key={index}>
+                          {index % 4 === 0 ? (
+                            <b className='text-amber-400 text-[15px]'>{sentence.trim()}</b>
+                          ) : (
+                            sentence.trim() !== ':' ? (
+                              <span>{sentence.trim()}</span>
+                            ) : null
+                          )}
+                          {(index + 1) % 2 === 0 ? <br /> : null}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                  <div className='inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
+                    <h2 className='text-2xl text-white uppercase font-bold'>{result[1].jenis_kecerdasan}</h2>
+                    <p className='text-sm text-white'>
+                      {result[1].keterangan.split(/([:.])/).map((sentence, index, array) => (
+                        <span key={index}>
+                          {index % 4 === 0 ? (
+                            <b className='text-amber-400 text-[15px]'>{sentence.trim()}</b>
+                          ) : (
+                            sentence.trim() !== ':' ? (
+                              <span>{sentence.trim()}</span>
+                            ) : null
+                          )}
+                          {(index + 1) % 2 === 0 ? <br /> : null}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                </section>
               </div>
               <button type="button" onClick={logoutFunc} className='bg-sky-700 hover:bg-sky-800 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
             </header>
