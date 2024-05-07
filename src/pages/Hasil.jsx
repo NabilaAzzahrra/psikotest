@@ -41,10 +41,10 @@ const Hasil = () => {
   }
 
   const getResult = async (data) => {
-    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
+    await axios.get(`http://localhost:8001/hasils/${data.id}`)
       .then((response) => {
         const data = response.data;
-        if (!data) {
+        if (data.length == 0) {
           return navigate('/home')
         }
         setResult(response.data);

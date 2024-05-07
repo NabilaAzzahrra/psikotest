@@ -48,7 +48,7 @@ function Home() {
     }
 
     const getResult = async (data) => {
-        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
+        await axios.get(`http://localhost:8001/hasils/${data.id}`)
             .then((response) => {
                 setResult(response.data);
                 setError(false);
@@ -70,7 +70,7 @@ function Home() {
 
     const startTest = async () => {
         try {
-            const responseUserExist = await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/users/${user.id}`);
+            const responseUserExist = await axios.get(`http://localhost:8001/users/${user.id}`);
             console.log(responseUserExist);
             if (responseUserExist.data) {
                 navigate('/question')
@@ -83,7 +83,7 @@ function Home() {
                     school: user.school,
                     classes: user.classes,
                 }
-                await axios.post(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/users`, data)
+                await axios.post(`http://localhost:8001/users`, data)
                     .then((response) => {
                         navigate('/question');
                     })
@@ -136,7 +136,7 @@ function Home() {
                                 <button type="button" onClick={logoutFunc} className='bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
                             </div>
                         ) : (
-                            result ? (
+                            result.length > 0 ? (
                                 <div className='text-center space-y-3'>
                                     <div className='border-2 border-gray-900 text-base hover:bg-gray-900 hover:text-white px-5 py-3'>
                                         <p>
