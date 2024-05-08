@@ -54,7 +54,7 @@ function Home() {
                 const data = response.data;
                 if (data.length == 0) {
                     setLoading(false);
-                    return navigate('/home')
+                    setError(false);
                 }
                 const resultOne = response.data[0];
                 const resultTwo = response.data[1];
