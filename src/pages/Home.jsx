@@ -42,7 +42,6 @@ function Home() {
 
                 setUser(data);
                 getResult(data);
-                setLoading(false);
             })
             .catch((error) => {
                 navigate('/');
