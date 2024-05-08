@@ -49,7 +49,7 @@ function Registers() {
             }
         }
 
-        setIsInvalid(truncatedInput.length < 11); // Set state for validation
+        setIsInvalid(truncatedInput.length < 11); 
         setPhoneReg(formattedValue);
     };
 
@@ -94,8 +94,9 @@ function Registers() {
         }
         await axios.post(`https://database.politekniklp3i-tasikmalaya.ac.id/api/auth/psikotest/register`, data)
             .then((response) => {
-                alert(response.data.message)
-                navigate('/')
+                console.log(response.data);
+                // alert(response.data.message)
+                // navigate('/')
             })
             .catch((error) => {
                 const errorCustom = error.response.data.message;

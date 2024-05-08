@@ -18,6 +18,7 @@ function Logins() {
             password: password
         })
             .then((response) => {
+                console.log(response.data);
                 localStorage.setItem('token', response.data.access_token)
                 alert(response.data.message)
                 navigate('/home')
