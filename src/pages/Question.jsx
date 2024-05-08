@@ -187,28 +187,28 @@ function Question() {
                     <div className='flex flex-col md:flex-row md:items-center justify-center gap-5 md:gap-10 p-4'>
                         <label>
                             <input type="radio" name="option" value="4" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 1} />
-                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 focus:bg-black focus:text-white border-black'>
+                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 sm:hover:bg-black sm:hover:text-white border-black'>
                                 Gue Banget
-                                <div className='text-xl rounded-full'>🤙</div>
+                                <div className='text-xl rounded-full'>👍</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="3" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 2} />
-                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 focus:bg-black focus:text-white border-black'>
+                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 sm:hover:bg-black sm:hover:text-white border-black'>
                                 Pas di Gue Sih
                                 <div className='text-xl rounded-full'>👌</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="2" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 3} />
-                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 focus:bg-black focus:text-white border-black'>
+                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 sm:hover:bg-black sm:hover:text-white border-black'>
                                 Bukan Gue
                                 <div className='text-xl rounded-full'>👋</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="1" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 4} />
-                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 focus:bg-black focus:text-white border-black'>
+                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 sm:hover:bg-black sm:hover:text-white border-black'>
                                 Bukan Gue Banget
                                 <div className='text-xl rounded-full'>👎</div>
                             </div>
