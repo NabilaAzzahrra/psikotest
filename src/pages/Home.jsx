@@ -13,7 +13,7 @@ function Home() {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(true);
-    const [jurusan, setjurusan] = useState('belum ada');
+    const [jurusan, setJurusan] = useState('belum ada');
     const navigate = useNavigate();
 
     const getUser = async () => {
@@ -52,38 +52,40 @@ function Home() {
         await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
             .then((response) => {
                 const data = response.data;
+                setResult(data);
+
                 if (data.length == 0) {
                     setLoading(false);
                     setError(false);
-                }
-                const resultOne = response.data[0];
-                const resultTwo = response.data[1];
-
-                const jurusanOne = resultOne.jurusan.split(',');
-                const jurusanTwo = resultTwo.jurusan.split(',');
-
-                if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
-                    if (jurusanOne.length == 1) {
-                        setjurusan(jurusanOne[0]);
-                    }
-                    if (jurusanTwo.length == 1) {
-                        setjurusan(jurusanTwo[0]);
-                    }
                 } else {
-                    let hasil = [];
-                    for (const jurusan of jurusanOne) {
-                        if (jurusanTwo.includes(jurusan)) {
-                            hasil.push(jurusan);
+                    const resultOne = response.data[0];
+                    const resultTwo = response.data[1];
+
+                    const jurusanOne = resultOne.jurusan.split(',');
+                    const jurusanTwo = resultTwo.jurusan.split(',');
+
+                    if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
+                        if (jurusanOne.length == 1) {
+                            setJurusan(jurusanOne[0]);
                         }
+                        if (jurusanTwo.length == 1) {
+                            setJurusan(jurusanTwo[0]);
+                        }
+                    } else {
+                        let hasil = [];
+                        for (const jurusan of jurusanOne) {
+                            if (jurusanTwo.includes(jurusan)) {
+                                hasil.push(jurusan);
+                            }
+                        }
+                        setJurusan(hasil[0]);
                     }
-                    setjurusan(hasil[0]);
+                    setLoading(false);
+                    setError(false);
                 }
-                setResult(response.data);
-                setError(false);
-                setLoading(false);
             })
             .catch((error) => {
-                setError(true);
+                setError(false);
                 setLoading(false);
             });
     }
