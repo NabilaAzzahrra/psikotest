@@ -8,6 +8,7 @@ import { checkTokenExpiration } from '../middlewares/middleware';
 
 const Hasil = () => {
   const [user, setUser] = useState({});
+  const [jurusan, setjurusan] = useState('belum ada');
   const [result, setResult] = useState(null);
 
   const navigate = useNavigate();
@@ -41,11 +42,33 @@ const Hasil = () => {
   }
 
   const getResult = async (data) => {
-    await axios.get(`http://localhost:8001/hasils/${data.id}`)
+    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanhasils/${data.id}`)
       .then((response) => {
         const data = response.data;
         if (data.length == 0) {
           return navigate('/home')
+        }
+        const resultOne = response.data[0];
+        const resultTwo = response.data[1];
+
+        const jurusanOne = resultOne.jurusan.split(',');
+        const jurusanTwo = resultTwo.jurusan.split(',');
+
+        if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
+          if (jurusanOne.length == 1) {
+            setjurusan(jurusanOne[0]);
+          }
+          if (jurusanTwo.length == 1) {
+            setjurusan(jurusanTwo[0]);
+          }
+        } else {
+          let hasil = [];
+          for (const jurusan of jurusanOne) {
+            if (jurusanTwo.includes(jurusan)) {
+              hasil.push(jurusan);
+            }
+          }
+          setjurusan(hasil[0]);
         }
         setResult(response.data);
       })
@@ -53,6 +76,7 @@ const Hasil = () => {
         console.log(error);
       });
   }
+
 
   const logoutFunc = () => {
     localStorage.removeItem('token');
@@ -114,7 +138,14 @@ const Hasil = () => {
                       ))}
                     </p>
                   </div>
+
                 </section>
+                <div className='inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
+                  <p className='text-sm text-white'>
+                    Jurusan yang dapat diambil adalah {jurusan}
+                  </p>
+                  <h2 className='text-2xl text-white uppercase font-bold' id='result'></h2>
+                </div>
               </div>
               <button type="button" onClick={logoutFunc} className='bg-sky-700 hover:bg-sky-800 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
             </header>

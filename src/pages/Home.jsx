@@ -13,6 +13,7 @@ function Home() {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(true);
+    const [jurusan, setjurusan] = useState('belum ada');
     const navigate = useNavigate();
 
     const getUser = async () => {
@@ -48,17 +49,41 @@ function Home() {
     }
 
     const getResult = async (data) => {
-        await axios.get(`http://localhost:8001/hasils/${data.id}`)
+        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanhasils/${data.id}`)
             .then((response) => {
+                const data = response.data;
+                if (data.length == 0) {
+                    return navigate('/home')
+                }
+                const resultOne = response.data[0];
+                const resultTwo = response.data[1];
+
+                const jurusanOne = resultOne.jurusan.split(',');
+                const jurusanTwo = resultTwo.jurusan.split(',');
+                console.log(jurusanOne);
+                if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
+                    if (jurusanOne.length == 1) {
+                        setjurusan(jurusanOne[0]);
+                    }
+                    if (jurusanTwo.length == 1) {
+                        setjurusan(jurusanTwo[0]);
+                    }
+                } else {
+                    let hasil = [];
+                    for (const jurusan of jurusanOne) {
+                        if (jurusanTwo.includes(jurusan)) {
+                            hasil.push(jurusan);
+                        }
+                    }
+                    setjurusan(hasil[0]);
+                }
                 setResult(response.data);
                 setError(false);
                 setLoading(false);
             })
             .catch((error) => {
-                if (error.code == 'ERR_NETWORK') {
-                    setError(true);
-                    setLoading(false);
-                }
+                setError(true);
+                setLoading(false);
             });
     }
 
@@ -70,7 +95,7 @@ function Home() {
 
     const startTest = async () => {
         try {
-            const responseUserExist = await axios.get(`http://localhost:8001/users/${user.id}`);
+            const responseUserExist = await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanusers/${user.id}`);
             console.log(responseUserExist);
             if (responseUserExist.data) {
                 navigate('/question')
@@ -83,7 +108,7 @@ function Home() {
                     school: user.school,
                     classes: user.classes,
                 }
-                await axios.post(`http://localhost:8001/users`, data)
+                await axios.post(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanusers`, data)
                     .then((response) => {
                         navigate('/question');
                     })
@@ -150,6 +175,10 @@ function Home() {
                                                 <span> & </span>
                                                 <span>{result[1].jenis_kecerdasan}</span>
                                             </span>
+                                        </p>
+                                        <p>
+                                            <span>Jurusan Rekomendasi: </span>
+                                            <span className='font-bold underline'>{jurusan}</span>
                                         </p>
                                     </div>
                                     <button type="button" onClick={logoutFunc} className='bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>

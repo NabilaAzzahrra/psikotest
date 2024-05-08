@@ -47,7 +47,7 @@ function Question() {
         checkTokenExpiration()
             .then(async (response) => {
                 console.log(response);
-                await axios.get("http://localhost:8001/questions")
+                await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanquestions")
                     .then((response) => {
                         setQuestions(response.data);
                     })
@@ -62,7 +62,7 @@ function Question() {
     }
 
     const getResult = async (data) => {
-        await axios.get(`http://localhost:8001/hasils/${data.id}`)
+        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanhasils/${data.id}`)
             .then((response) => {
                 const data = response.data;
                 if (data.length > 0) {
@@ -128,7 +128,7 @@ function Question() {
             setCurrentQuestion(currentQuestion + 1);
             setTimeout(() => {
                 setLoading(false);
-            }, 1000);
+            }, 100);
         }
     };
 
@@ -147,7 +147,7 @@ function Question() {
         };
         bucket.push(data);
         localStorage.setItem('bucket', JSON.stringify(bucket));
-        await axios.post("http://localhost:8001/tests", {
+        await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasantests", {
             answers: bucket,
         })
             .then((response) => {
@@ -178,7 +178,7 @@ function Question() {
                     <div className='text-md font-bold rounded-3xl flex justify-center'>
                         <div className="flex items-center">
                             <Lottie animationData={questionImage} loop={true} className='h-40' />
-                            QUESTION {currentQuestion + 1} / 80
+                            QUESTION {currentQuestion + 1} / {questions.length}
                         </div>
                     </div>
                     <div className='bg-gray-100 p-4 mx-5 rounded-xl'>
