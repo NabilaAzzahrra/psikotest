@@ -10,6 +10,7 @@ function Question() {
     const [questions, setQuestions] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
+    const [active, setActive] = useState(0);
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({});
 
@@ -107,7 +108,12 @@ function Question() {
         }
     };
 
+    const handleOptionSelect = (event) => {
+        handleNextQuestion(event.target.value);
+    };
+
     const handleNextQuestion = (answer) => {
+        setActive(parseInt(answer));
         setLoading(true);
         let bucket = localStorage.getItem('bucket') || '[]';
         const questionLength = questions.length;
@@ -115,7 +121,6 @@ function Question() {
         if (currentQuestion + 1 === questionLength) {
             handleFinish(answer);
         } else {
-            console.log(questions);
             let data = {
                 question: currentQuestion + 1,
                 id_question: questions[currentQuestion].id,
@@ -128,12 +133,9 @@ function Question() {
             setCurrentQuestion(currentQuestion + 1);
             setTimeout(() => {
                 setLoading(false);
+                setActive(0);
             }, 1000);
         }
-    };
-
-    const handleOptionSelect = (event) => {
-        handleNextQuestion(event.target.value);
     };
 
     const handleFinish = async (answer) => {
@@ -154,6 +156,7 @@ function Question() {
                 localStorage.removeItem('bucket');
                 setTimeout(() => {
                     setLoading(false);
+                    setActive(0);
                     navigate('/result')
                 }, 1000);
             })
@@ -187,28 +190,28 @@ function Question() {
                     <div className='flex flex-col md:flex-row md:items-center justify-center gap-5 md:gap-10 p-4'>
                         <label>
                             <input type="radio" name="option" value="4" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 1} />
-                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className={`flex text-[15px] justify-center ${active == 4 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
                                 Gue Banget
                                 <div className='text-xl rounded-full'>👍</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="3" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 2} />
-                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className={`flex text-[15px] justify-center ${active == 3 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
                                 Pas di Gue Sih
                                 <div className='text-xl rounded-full'>👌</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="2" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 3} />
-                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className={`flex text-[15px] justify-center ${active == 2 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
                                 Bukan Gue
                                 <div className='text-xl rounded-full'>👋</div>
                             </div>
                         </label>
                         <label>
                             <input type="radio" name="option" value="1" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 4} />
-                            <div className='flex text-[15px] justify-center bg-white px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 hover:bg-black hover:text-white border-black'>
+                            <div className={`flex text-[15px] justify-center ${active == 1 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
                                 Bukan Gue Banget
                                 <div className='text-xl rounded-full'>👎</div>
                             </div>
