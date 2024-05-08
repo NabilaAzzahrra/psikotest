@@ -142,9 +142,9 @@ const Hasil = () => {
                 </section>
                 <div className='inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
                   <p className='text-sm text-white'>
-                    Jurusan yang dapat diambil adalah {jurusan}
+                    Jurusan yang dapat diambil adalah 
                   </p>
-                  <h2 className='text-2xl text-white uppercase font-bold' id='result'></h2>
+                  <h2 className='text-2xl text-white uppercase font-bold' id='result'>{jurusan}</h2>
                 </div>
               </div>
               <button type="button" onClick={logoutFunc} className='bg-sky-700 hover:bg-sky-800 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
