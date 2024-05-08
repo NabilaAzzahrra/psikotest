@@ -49,7 +49,7 @@ function Home() {
     }
 
     const getResult = async (data) => {
-        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanhasils/${data.id}`)
+        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
             .then((response) => {
                 const data = response.data;
                 if (data.length == 0) {
@@ -95,7 +95,7 @@ function Home() {
 
     const startTest = async () => {
         try {
-            const responseUserExist = await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanusers/${user.id}`);
+            const responseUserExist = await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/users/${user.id}`);
             console.log(responseUserExist);
             if (responseUserExist.data) {
                 navigate('/question')
@@ -108,7 +108,7 @@ function Home() {
                     school: user.school,
                     classes: user.classes,
                 }
-                await axios.post(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanusers`, data)
+                await axios.post(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/users`, data)
                     .then((response) => {
                         navigate('/question');
                     })

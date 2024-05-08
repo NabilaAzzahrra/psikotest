@@ -42,7 +42,7 @@ const Hasil = () => {
   }
 
   const getResult = async (data) => {
-    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanhasils/${data.id}`)
+    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
       .then((response) => {
         const data = response.data;
         if (data.length == 0) {

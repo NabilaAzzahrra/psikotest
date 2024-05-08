@@ -11,7 +11,7 @@ function Criteria() {
   const tableRef = useRef(null);
 
   const getType = async () => {
-    await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasantypes")
+    await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types")
       .then((response) => {
         console.log(response.data);
         setTypes(response.data);
@@ -23,7 +23,7 @@ function Criteria() {
 
   const typeSave = async (e) => {
     e.preventDefault();
-    await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasantypes", {
+    await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types", {
       jenis_kecerdasan: name,
     })
       .then((response) => {
@@ -42,7 +42,7 @@ function Criteria() {
       'Apakah yakin akan di hapus?'
     )
     if (konfirmasi) {
-      await axios.delete(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasantypes/${id}`)
+      await axios.delete(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types/${id}`)
         .then((response) => {
           alert(response.data.message);
           getType();
@@ -55,7 +55,7 @@ function Criteria() {
   }
 
   const typeUpdate=async(e)=>{
-    await axios.put(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasantypes/${id}`, {
+    await axios.put(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/types/${id}`, {
       name: name,
     })
       .then((response) => {

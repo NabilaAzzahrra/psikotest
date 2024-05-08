@@ -47,7 +47,7 @@ function Question() {
         checkTokenExpiration()
             .then(async (response) => {
                 console.log(response);
-                await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanquestions")
+                await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions")
                     .then((response) => {
                         setQuestions(response.data);
                     })
@@ -62,7 +62,7 @@ function Question() {
     }
 
     const getResult = async (data) => {
-        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasanhasils/${data.id}`)
+        await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
             .then((response) => {
                 const data = response.data;
                 if (data.length > 0) {
@@ -147,7 +147,7 @@ function Question() {
         };
         bucket.push(data);
         localStorage.setItem('bucket', JSON.stringify(bucket));
-        await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasantests", {
+        await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/tests", {
             answers: bucket,
         })
             .then((response) => {
