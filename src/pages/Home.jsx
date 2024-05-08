@@ -53,6 +53,7 @@ function Home() {
             .then((response) => {
                 const data = response.data;
                 if (data.length == 0) {
+                    setLoading(false);
                     return navigate('/home')
                 }
                 const resultOne = response.data[0];
@@ -60,7 +61,7 @@ function Home() {
 
                 const jurusanOne = resultOne.jurusan.split(',');
                 const jurusanTwo = resultTwo.jurusan.split(',');
-                console.log(jurusanOne);
+
                 if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
                     if (jurusanOne.length == 1) {
                         setjurusan(jurusanOne[0]);
