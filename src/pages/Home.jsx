@@ -64,7 +64,9 @@ function Home() {
                     const jurusanOne = resultOne.jurusan.split(',');
                     const jurusanTwo = resultTwo.jurusan.split(',');
 
-                    if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
+                    if (jurusanOne.length == 1 && jurusanTwo.length == 1) {
+                        setJurusan(resultOne.jurusan);
+                    } else if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
                         if (jurusanOne.length == 1) {
                             setJurusan(jurusanOne[0]);
                         }

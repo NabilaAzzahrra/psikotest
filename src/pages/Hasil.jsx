@@ -8,7 +8,7 @@ import { checkTokenExpiration } from '../middlewares/middleware';
 
 const Hasil = () => {
   const [user, setUser] = useState({});
-  const [jurusan, setjurusan] = useState('belum ada');
+  const [jurusan, setJurusan] = useState('belum ada');
   const [result, setResult] = useState(null);
 
   const navigate = useNavigate();
@@ -54,12 +54,14 @@ const Hasil = () => {
         const jurusanOne = resultOne.jurusan.split(',');
         const jurusanTwo = resultTwo.jurusan.split(',');
 
-        if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
+        if (jurusanOne.length == 1 && jurusanTwo.length == 1) {
+          setJurusan(resultOne.jurusan);
+        } else if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
           if (jurusanOne.length == 1) {
-            setjurusan(jurusanOne[0]);
+            setJurusan(jurusanOne[0]);
           }
           if (jurusanTwo.length == 1) {
-            setjurusan(jurusanTwo[0]);
+            setJurusan(jurusanTwo[0]);
           }
         } else {
           let hasil = [];
@@ -68,7 +70,7 @@ const Hasil = () => {
               hasil.push(jurusan);
             }
           }
-          setjurusan(hasil[0]);
+          setJurusan(hasil[0]);
         }
         setResult(response.data);
       })
@@ -142,7 +144,7 @@ const Hasil = () => {
                 </section>
                 <div className='inline-block text-center bg-sky-600 rounded-2xl px-10 py-4 space-y-2'>
                   <p className='text-sm text-white'>
-                    Jurusan yang dapat diambil adalah 
+                    Jurusan yang dapat diambil adalah
                   </p>
                   <h2 className='text-2xl text-white uppercase font-bold' id='result'>{jurusan}</h2>
                 </div>
