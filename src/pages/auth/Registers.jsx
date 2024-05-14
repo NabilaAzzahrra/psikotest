@@ -154,6 +154,7 @@ function Registers() {
                                 <option value="TO23">TO23</option>
                                 <option value="AB17">AB17</option>
                                 <option value="NR2024">NR2024</option>*/}
+                                <option value="">Pilih</option>
                                 <option value="X1">X1</option>
                                 <option value="X2">X2</option>
                                 <option value="X3">X3</option>
