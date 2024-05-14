@@ -146,15 +146,15 @@ function Registers() {
                         <div>
                             <label htmlFor="classes" className="block mb-2 text-sm font-medium text-gray-900">Kelas</label>
                             <select id="clasess" onChange={(e) => setClassReg(e.target.value)} className="bg-gray-50 border font-reguler border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" data-placeholder="Nabil" required>
-                                <option value="">Pilih</option>
+                                {/*<option value="">Pilih</option>
                                 <option value="MKP04">MKP04</option>
                                 <option value="MP04">MP04</option>
                                 <option value="MI23A">MI23A</option>
                                 <option value="MI23B">MI23B</option>
                                 <option value="TO23">TO23</option>
                                 <option value="AB17">AB17</option>
-                                <option value="NR2024">NR2024</option>
-                                {/* <option value="X1">X1</option>
+                                <option value="NR2024">NR2024</option>*/}
+                                <option value="X1">X1</option>
                                 <option value="X2">X2</option>
                                 <option value="X3">X3</option>
                                 <option value="X4">X4</option>
@@ -166,7 +166,7 @@ function Registers() {
                                 <option value="X10">X10</option>
                                 <option value="X11">X11</option>
                                 <option value="X12">X12</option>
-                                <option value="X13">X13</option> */}
+                                <option value="X13">X13</option>
                             </select>
                             <small className='text-xs text-red-600'>{errorsClasses}</small>
                         </div>
