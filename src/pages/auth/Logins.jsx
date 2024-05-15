@@ -21,7 +21,8 @@ function Logins() {
                 console.log(response.data);
                 localStorage.setItem('token', response.data.access_token)
                 alert(response.data.message)
-                navigate('/home')
+                // navigate('/home')
+                alert('Halaman Belum Tersedia')
             })
             .catch((error) => {
                 if (error.response.status == 401) {
