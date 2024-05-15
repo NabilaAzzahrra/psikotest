@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import Home from './pages/Home.jsx'
+import Halaman from './pages/Halaman.jsx'
 import Hasil from './pages/Hasil.jsx'
 import Question from './pages/Question.jsx'
 import Criteria from './pages/admin/Criteria.jsx'
@@ -24,9 +25,13 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Registers />
   },
+  // {
+  //   path: "/home",
+  //   element: <Home />
+  // },
   {
     path: "/home",
-    element: <Home />
+    element: < Halaman />
   },
   {
     path: "/question",
