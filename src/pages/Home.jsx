@@ -27,7 +27,7 @@ function Home() {
                 const userEmail = decoded.email;
                 const userPhone = decoded.phone;
                 const userSchool = decoded.school ?? 'Tidak diketahui';
-                const userClasses = decoded.classes ?? 'Tidak diketahui';
+                const userClasses = decoded.class ?? 'Tidak diketahui';
                 const userStatus = decoded.status;
 
                 const data = {
