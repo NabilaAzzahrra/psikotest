@@ -67,7 +67,7 @@ function Logins() {
                     </div>
                     <div className='space-x-3'>
                         <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-reguler rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center">Masuk</button>
-                        <a href={`/home`} className='text-sm text-gray-700 hover:underline'>
+                        <a href={`/register`} className='text-sm text-gray-700 hover:underline'>
                             <span>Belum punya akun? </span>
                             <span className='font-medium'>Daftar disini</span>
                         </a>
