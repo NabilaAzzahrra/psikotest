@@ -26,7 +26,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           if git ls-remote --exit-code --heads origin gh-pages; then
-            git branch -D gh-pages
+            git branch -D gh-pages 2>/dev/null
             git checkout --orphan gh-pages
           else
             git checkout --orphan gh-pages
