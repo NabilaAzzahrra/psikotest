@@ -30,4 +30,6 @@ jobs:
           fi
           git checkout --orphan gh-pages
           npm run build
+          mv -f dist/* .
+          rm -rf dist README.md index.html node_modules package-lock.json package.json public src tailwind.config.js vite.config.js
           ls -l
