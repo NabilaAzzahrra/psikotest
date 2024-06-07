@@ -33,11 +33,9 @@ jobs:
           else
             git checkout --orphan gh-pages
           fi
-          npm run build
-          git rm -rf README.md index.html node_modules package-lock.json package.json public src tailwind.config.js vite.config.js
+          git rm -rf .
           mv -f dist/* .
           rm -rf dist
-          ls -l
           git add .
           git commit -m "Deploy to GitHub Pages"
           git push -u origin gh-pages
