@@ -33,6 +33,7 @@ jobs:
           else
             git checkout --orphan gh-pages
           fi
+          npm run build
           ls -l
           mv -f dist/* .
           rm -rf dist
