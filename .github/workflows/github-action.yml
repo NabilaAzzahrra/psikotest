@@ -19,7 +19,6 @@ jobs:
       - name: Build project
         run: |
           npm run build
-          ls
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY }}
@@ -34,6 +33,7 @@ jobs:
           else
             git checkout --orphan gh-pages
           fi
+          ls -l
           git rm -rf .
           mv -f dist/* .
           rm -rf dist
