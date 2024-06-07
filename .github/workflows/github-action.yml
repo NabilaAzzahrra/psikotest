@@ -29,7 +29,7 @@ jobs:
           npm run build
           rm -rf README.md index.html node_modules package-lock.json package.json public src tailwind.config.js vite.config.js
           mv -f dist/* .
-          rm -rf dist .github .env .eslintrc.cjs .gitignore .htaccess
+          rm -rf dist .github .env .eslintrc.cjs .gitignore .git
           git add .
           git commit -m "Deploy to GitHub Pages"
           git push -u origin gh-pages
