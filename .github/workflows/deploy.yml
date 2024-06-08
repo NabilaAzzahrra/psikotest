@@ -26,3 +26,4 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           cd dist
           ls -l
+          cat index.html
