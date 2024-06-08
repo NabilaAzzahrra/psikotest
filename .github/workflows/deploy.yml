@@ -17,18 +17,11 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build project
-        run: |
-          npm run build
-          ls -l
-          cd dist
-          ls -l
-          cat index.html
+        run: npm run build
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          cd dist
           ls -l
-          cat index.html
