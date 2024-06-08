@@ -34,3 +34,4 @@ jobs:
           git commit -m "DEPLOY"
           git status
           git log --graph
+          git push -u -f origin/gh-pages
