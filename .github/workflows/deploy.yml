@@ -27,4 +27,6 @@ jobs:
           git fetch
           git checkout origin/gh-pages
           rm -rf assets favicon README.md index.html node_modules package-lock.json package.json public src tailwind.config.js vite.config.js
+          mv dist/* .
+          rm -rf dist
           ls -l
