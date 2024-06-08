@@ -24,4 +24,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          rm -rf README.md index.html node_modules package-lock.json package.json public src tailwind.config.js vite.config.js
+          mv dist/* .
+          rm -rf dist
           ls -l
+          cat index.html
