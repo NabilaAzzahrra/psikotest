@@ -26,6 +26,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git fetch
           git checkout origin/gh-pages
+          ls -l
           cd dist
           ls -l
           cat index.html
