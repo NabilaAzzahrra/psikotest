@@ -30,4 +30,6 @@ jobs:
           mv dist/* .
           rm -rf dist
           ls -l
+          git add .
+          git commit -m "DEPLOY"
           git status
