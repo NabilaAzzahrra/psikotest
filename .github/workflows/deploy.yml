@@ -26,5 +26,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git fetch
           git checkout origin/gh-pages
-          rm -rf README.md index.html node_modules package-lock.json package.json public src tailwind.config.js vite.config.js
+          rm -rf assets favicon README.md index.html node_modules package-lock.json package.json public src tailwind.config.js vite.config.js
           ls -l
