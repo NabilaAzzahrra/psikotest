@@ -24,12 +24,4 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "DEPLOY"
-          git checkout gh-pages
-          rm -rf assets favicon node_modules index.html vite.svg
-          mv dist/* .
-          rm -rf dist
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push -u origin gh-pages
+          ls -l
