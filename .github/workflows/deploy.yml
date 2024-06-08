@@ -24,5 +24,5 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout gh-pages
+          git checkout origin/gh-pages
           ls -l
