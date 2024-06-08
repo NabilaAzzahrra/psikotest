@@ -17,9 +17,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build project
-        run: |
-          npm run build
-          git branch --remote
+        run: npm run build
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY }}
@@ -27,4 +25,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git fetch
-          git branch --remote
+          git checkout origin/gh-pages
+          ls -l
