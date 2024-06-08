@@ -33,3 +33,4 @@ jobs:
           git add .
           git commit -m "DEPLOY"
           git status
+          git log --graph
