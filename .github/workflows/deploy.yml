@@ -20,6 +20,8 @@ jobs:
         run: |
           npm run build
           ls -l
+          cd dist
+          ls -l
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY }}
