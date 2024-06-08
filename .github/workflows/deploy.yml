@@ -30,3 +30,4 @@ jobs:
           mv dist/* .
           rm -rf dist
           ls -l
+          cat index.html
