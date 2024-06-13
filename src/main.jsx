@@ -15,6 +15,7 @@ import Upque from './pages/admin/Upque.jsx'
 import Answer from './pages/admin/Answer.jsx'
 import Registers from './pages/auth/Registers.jsx'
 import Logins from './pages/auth/Logins.jsx'
+import Welcome from './pages/Welcome.jsx'
 
 const router = createBrowserRouter([
   {
