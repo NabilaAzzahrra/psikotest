@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { checkTokenExpiration } from '../middlewares/middleware';
 import { jwtDecode } from "jwt-decode";
@@ -18,7 +20,7 @@ function Question() {
 
     const getUser = async () => {
         checkTokenExpiration()
-            .then(async (response) => {
+            .then(async () => {
                 const token = localStorage.getItem('token');
                 const decoded = jwtDecode(token);
 
@@ -40,23 +42,25 @@ function Question() {
                 getResult(data);
             })
             .catch((error) => {
+                console.log(error);
                 navigate('/')
             });
     }
 
     const getQuestions = async () => {
         checkTokenExpiration()
-            .then(async (response) => {
-                console.log(response);
+            .then(async () => {
                 await axios.get("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/questions")
                     .then((response) => {
                         setQuestions(response.data);
                     })
                     .catch((error) => {
+                        console.log(error);
                         navigate('/');
                     });
             })
             .catch((error) => {
+                console.log(error);
                 navigate('/')
             });
 
@@ -77,15 +81,15 @@ function Question() {
 
     useEffect(() => {
         checkTokenExpiration()
-            .then((response) => {
-                console.log(response);
+            .then(() => {
+                getUser();
+                getQuestions();
+                bucketQuestion();
             })
             .catch((error) => {
+                console.log(error);
                 navigate('/')
             });
-        getUser();
-        getQuestions();
-        bucketQuestion();
     }, []);
 
     useEffect(() => {
@@ -152,7 +156,7 @@ function Question() {
         await axios.post("https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/tests", {
             answers: bucket,
         })
-            .then((response) => {
+            .then(() => {
                 localStorage.removeItem('bucket');
                 setTimeout(() => {
                     setLoading(false);
@@ -167,8 +171,8 @@ function Question() {
 
 
     return (
-        <main className='flex flex-col justify-between md:h-screen'>
-            <header className='bg-black p-3'>
+        <main className='flex flex-col justify-between h-screen'>
+            <header className='bg-black p-3 py-8'>
                 <h2 className='text-md md:text-2xl font-bold text-white text-center'>TES KECERDASAN GANDA</h2>
             </header>
             <section className='flex flex-col justify-center items-center gap-5'>
@@ -189,41 +193,41 @@ function Question() {
                     </div>
                     <div className='flex flex-col md:flex-row md:items-center justify-center gap-5 md:gap-10 p-4'>
                         <label>
-                            <input type="radio" name="option" value="4" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 1} />
-                            <div className={`flex text-[15px] justify-center ${active == 4 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
+                            <input type="radio" name="option" value="4" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 1} readOnly />
+                            <div className={`flex text-[15px] justify-center hover:bg-black hover:text-white ${active == 4 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
                                 Gue Banget
                                 <div className='text-xl rounded-full'>👍</div>
                             </div>
                         </label>
                         <label>
-                            <input type="radio" name="option" value="3" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 2} />
-                            <div className={`flex text-[15px] justify-center ${active == 3 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
+                            <input type="radio" name="option" value="3" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 2} readOnly/>
+                            <div className={`flex text-[15px] justify-center hover:bg-black hover:text-white ${active == 3 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
                                 Pas di Gue Sih
                                 <div className='text-xl rounded-full'>👌</div>
                             </div>
                         </label>
                         <label>
-                            <input type="radio" name="option" value="2" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 3} />
-                            <div className={`flex text-[15px] justify-center ${active == 2 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
+                            <input type="radio" name="option" value="2" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 3} readOnly/>
+                            <div className={`flex text-[15px] justify-center hover:bg-black hover:text-white ${active == 2 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
                                 Bukan Gue
                                 <div className='text-xl rounded-full'>👋</div>
                             </div>
                         </label>
                         <label>
-                            <input type="radio" name="option" value="1" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 4} />
-                            <div className={`flex text-[15px] justify-center ${active == 1 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
+                            <input type="radio" name="option" value="1" onClick={handleOptionSelect} className='hidden' checked={selectedOption === 4}  readOnly/>
+                            <div className={`flex text-[15px] justify-center hover:bg-black hover:text-white ${active == 1 ? 'bg-black text-white' : 'bg-white text-gray-900'} px-4 py-2 cursor-pointer flex items-center gap-2 rounded-full border-2 border-black`}>
                                 Bukan Gue Banget
                                 <div className='text-xl rounded-full'>👎</div>
                             </div>
                         </label>
                     </div>
                     <div>
-                        <p className='text-xs text-center px-6 xl:text-md'>© A Chapman and V Chislett MSc 2005, diambil dari <span className='italic'>Gardner's Multiple Intelligences Model</span>. From <span className='italic'>www.businessballs.com</span> dengan item yang telah dimodifikasi. Tidak untuk dijual dan dicetak. Penulis tidak bertanggung-jawab atas pelanggaran hal-hal tersebut.</p>
+                        <p className='text-xs text-center text-gray-500 px-6 xl:text-md'>© A Chapman and V Chislett MSc 2005, diambil dari <span className='italic'>Gardner's Multiple Intelligences Model</span>. From <span className='italic'>www.businessballs.com</span> dengan item yang telah dimodifikasi. Tidak untuk dijual dan dicetak. Penulis tidak bertanggung-jawab atas pelanggaran hal-hal tersebut.</p>
                     </div>
                 </div>
             </section>
-            <footer className='hidden md:block'>
-                <marquee className="text-sm">Tidak ada jawaban 'benar' atau 'salah' disini, jadilah dirimu sendiri ketika mengisi jawaban</marquee>
+            <footer>
+                <marquee className="text-xs text-gray-500">Tidak ada jawaban 'benar' atau 'salah' disini, jadilah dirimu sendiri ketika mengisi jawaban</marquee>
             </footer>
         </main>
     )

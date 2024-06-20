@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreatableSelect from "react-select/creatable";
 import axios from 'axios';
@@ -7,7 +7,7 @@ import "../../assets/css/select-react.css";
 import logoLp3i from '../../assets/img/logo-lp3i.png'
 import logoTagline from '../../assets/img/tagline-warna.png'
 
-function Registers() {
+const Register = () => {
     const [nameReg, setNameReg] = useState('');
     const [emailReg, setEmailReg] = useState('');
     const [schoolReg, setSchoolReg] = useState('');
@@ -105,26 +105,17 @@ function Registers() {
                 setErrorsEmail(errorCustom.email);
                 setErrorsPhone(errorCustom.phone);
                 setErrorsPassword(errorCustom.password);
-                console.log(error.response.data.message);
             });
     }
 
     useEffect(() => {
         checkTokenExpiration()
-        .then((response) => {
+        .then(() => {
             window.history.back();
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(() => {
+            getSchools();
         });
-        forbiddenAccess()
-        .then((response)=> {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-        getSchools();
     }, []);
 
     return (
@@ -212,4 +203,4 @@ function Registers() {
     )
 }
 
-export default Registers
+export default Register

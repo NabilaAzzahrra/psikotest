@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logoLp3i from '../../assets/img/logo-lp3i.png'
 import logoTagline from '../../assets/img/tagline-warna.png'
 import { checkTokenExpiration, forbiddenAccess } from '../../middlewares/middleware';
 
-function Logins() {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -34,7 +34,7 @@ function Logins() {
 
     useEffect(() => {
         checkTokenExpiration()
-        .then((response) => {
+        .then(() => {
             window.history.back();
         })
         .catch((error) => {
@@ -78,4 +78,4 @@ function Logins() {
     )
 }
 
-export default Logins
+export default Login

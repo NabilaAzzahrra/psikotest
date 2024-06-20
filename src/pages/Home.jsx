@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import Lottie from "lottie-react";
 import awanLp3i from "../assets/img/awan-lp3i.json";
 import logoLp3i from '../assets/img/logo-lp3i.png'
@@ -18,7 +19,7 @@ function Home() {
 
     const getUser = async () => {
         checkTokenExpiration()
-            .then((response) => {
+            .then(() => {
                 const token = localStorage.getItem('token');
                 const decoded = jwtDecode(token);
 
@@ -44,6 +45,7 @@ function Home() {
                 getResult(data);
             })
             .catch((error) => {
+                console.log(error);
                 navigate('/');
             });
     }
@@ -87,6 +89,7 @@ function Home() {
                 }
             })
             .catch((error) => {
+                console.log(error);
                 setError(false);
                 setLoading(false);
             });
@@ -101,7 +104,6 @@ function Home() {
     const startTest = async () => {
         try {
             const responseUserExist = await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/users/${user.id}`);
-            console.log(responseUserExist);
             if (responseUserExist.data) {
                 navigate('/question')
             } else {
@@ -114,7 +116,7 @@ function Home() {
                     classes: user.classes,
                 }
                 await axios.post(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/users`, data)
-                    .then((response) => {
+                    .then(() => {
                         navigate('/question');
                     })
                     .catch((error) => {
@@ -128,13 +130,12 @@ function Home() {
     }
 
     useEffect(() => {
-        getUser();
         checkTokenExpiration()
-            .then((response) => {
-                console.log(response);
+            .then(() => {
+                getUser();
             })
-            .catch((error) => {
-                navigate('/')
+            .catch(() => {
+                navigate('/');
             });
     }, []);
 
@@ -152,7 +153,7 @@ function Home() {
                     <h2 className='uppercase font-bold text-3xl'>
                         Tes Kecerdasan Ganda
                     </h2>
-                    <p className='text-sm'>Puncak kebahagiaan dan kesuksesan kita tercapai saat kita memanfaatkan kecerdasan alami kita secara optimal. Fokuslah pada pembelajaran dan pekerjaan yang sesuai dengan kekuatan, gaya, dan jenis otak kita sendiri.</p>
+                    <p className='text-sm'>Puncak kebahagiaan dan kesuksesan kita tercapai saat kita memanfaatkan kecerdasan alami kita secara optimal.<br/>Fokuslah pada pembelajaran dan pekerjaan yang sesuai dengan kekuatan, gaya, dan jenis otak kita sendiri.</p>
                 </div>
                 {
                     loading ? (
@@ -168,7 +169,7 @@ function Home() {
                         ) : (
                             result.length > 0 ? (
                                 <div className='text-center space-y-3'>
-                                    <div className='border-2 border-gray-900 text-base hover:bg-gray-900 hover:text-white px-5 py-3'>
+                                    <div className='border-2 border-gray-900 text-base px-5 py-3'>
                                         <p>
                                             <span>Nama Lengkap: </span>
                                             <span className='font-bold underline'>{user.name}</span>

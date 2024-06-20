@@ -7,52 +7,43 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import Home from './pages/Home.jsx'
-import Halaman from './pages/Halaman.jsx'
-import Hasil from './pages/Hasil.jsx'
-import Question from './pages/Question.jsx'
-import Criteria from './pages/admin/Criteria.jsx'
-import Upque from './pages/admin/Upque.jsx'
+import Result from './pages/Result.jsx'
 import Answer from './pages/admin/Answer.jsx'
-import Registers from './pages/auth/Registers.jsx'
-import Logins from './pages/auth/Logins.jsx'
-import Welcome from './pages/Welcome.jsx'
+import Register from './pages/auth/Register.jsx'
+import Login from './pages/auth/Login.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Logins />
+    element: <Login />
   },
   {
     path: "/register",
-    element: <Registers />
+    element: <Register />
   },
   {
     path: "/home",
     element: <Home />
   },
-  {
-    path: "/home",
-    element: <Halaman />
-  },
-  {
-    path: "/question",
-    element: <Question />
-  },
-  {
-    path: "/criteria",
-    element: <Criteria />
-  },
-  {
-    path: "/upque",
-    element: <Upque />
-  },
+  // {
+  //   path: "/question",
+  //   element: <Question />
+  // },
+  // {
+  //   path: "/criteria",
+  //   element: <Criteria />
+  // },
+  // {
+  //   path: "/upque",
+  //   element: <Upque />
+  // },
   {
     path: "/answer",
     element: <Answer />
   },
   {
     path: "/result",
-    element: <Hasil />
+    element: <Result />
   },
 ])
 
