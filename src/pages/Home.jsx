@@ -14,7 +14,7 @@ function Home() {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(true);
-    const [jurusan, setJurusan] = useState('belum ada');
+    // const [jurusan, setJurusan] = useState('belum ada');
     const navigate = useNavigate();
 
     const getUser = async () => {
