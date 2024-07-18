@@ -11,6 +11,7 @@ import Result from './pages/Result.jsx'
 import Answer from './pages/admin/Answer.jsx'
 import Register from './pages/auth/Register.jsx'
 import Login from './pages/auth/Login.jsx'
+import Question from './pages/Question.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,10 +26,10 @@ const router = createBrowserRouter([
     path: "/home",
     element: <Home />
   },
-  // {
-  //   path: "/question",
-  //   element: <Question />
-  // },
+  {
+    path: "/question",
+    element: <Question />
+  },
   // {
   //   path: "/criteria",
   //   element: <Criteria />

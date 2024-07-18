@@ -47,6 +47,7 @@ const Result = () => {
     await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`)
       .then((response) => {
         const data = response.data;
+        console.log(data);
         if (data.length == 0) {
           return navigate('/home')
         }
@@ -56,7 +57,7 @@ const Result = () => {
         const jurusanOne = resultOne.jurusan.split(',');
         const jurusanTwo = resultTwo.jurusan.split(',');
 
-        if (jurusanOne.length == 1 && jurusanTwo.length == 1) {
+        if (jurusanOne.length == 1 ) {
           setJurusan(resultOne.jurusan);
         } else if (jurusanOne.length == 1 || jurusanTwo.length == 1) {
           if (jurusanOne.length == 1) {
@@ -108,9 +109,16 @@ const Result = () => {
             <h3 className='text-white font-bold text-lg'>{user.name}</h3>
             <hr />
             <p className='text-sm text-white'>
-              Jurusan yang dapat diambil adalah
+              {/* Jurusan yang dapat diambil adalah */}
+              Jenis Kecerdasan Kamu adalah 
             </p>
-            <h2 className='text-2xl text-white uppercase font-bold' id='result'>{jurusan}</h2>
+            {
+          result ? (
+            <h2 className='text-2xl text-white uppercase font-bold' id='result'>{result[0].jenis_kecerdasan}</h2>
+          ) :(
+            <p className='text-sm text-white'>Loading..</p>
+          )
+        }
           </div>
           <button type="button" onClick={logoutFunc} className='bg-sky-700 hover:bg-sky-800 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
         </section>
@@ -134,7 +142,7 @@ const Result = () => {
                   ))}
                 </div>
               </div>
-              <div className='flex flex-col items-center justify-center text-center bg-sky-600 rounded-3xl px-10 py-5 space-y-2'>
+              {/* <div className='flex flex-col items-center justify-center text-center bg-sky-600 rounded-3xl px-10 py-5 space-y-2'>
                 <h2 className='text-2xl text-white uppercase font-bold'>{result[1].jenis_kecerdasan}</h2>
                 <div className='text-white space-y-1'>
                   {result[1].keterangan.split(/([:.])/).map((sentence, index) => (
@@ -150,7 +158,7 @@ const Result = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </section>
           ) : (
             <p className='text-sm text-white'>Loading..</p>

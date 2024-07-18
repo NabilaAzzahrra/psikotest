@@ -138,7 +138,7 @@ function Question() {
             setTimeout(() => {
                 setLoading(false);
                 setActive(0);
-            }, 1000);
+            }, 100);
         }
     };
 
