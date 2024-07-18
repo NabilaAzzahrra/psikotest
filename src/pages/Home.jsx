@@ -14,7 +14,7 @@ function Home() {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(true);
-    // const [jurusan, setJurusan] = useState('belum ada');
+    const [jurusan, setJurusan] = useState('belum ada');
     const navigate = useNavigate();
 
     const getUser = async () => {
@@ -167,30 +167,30 @@ function Home() {
                                 <button type="button" onClick={logoutFunc} className='bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
                             </div>
                         ) : (
-                            // result.length > 0 ? (
-                            //     <div className='text-center space-y-3'>
-                            //         <div className='border-2 border-gray-900 text-base px-5 py-3'>
-                            //             <p>
-                            //                 <span>Nama Lengkap: </span>
-                            //                 <span className='font-bold underline'>{user.name}</span>
-                            //             </p>
-                            //             <p>
-                            //                 <span>Jenis Kecerdasan Anda: </span>
-                            //                 <span className='font-bold underline'>
-                            //                     <span>{result[0].jenis_kecerdasan}</span>
-                            //                     {/* <span> & </span>
-                            //                     <span>{result[1].jenis_kecerdasan}</span> */}
-                            //                 </span>
-                            //             </p>
-                            //             {/* <p>
-                            //                 <span>Jurusan Rekomendasi: </span>
-                            //                 <span className='font-bold underline'>{jurusan}</span>
-                            //             </p> */}
-                            //         </div>
-                            //         <button type="button" onClick={logoutFunc} className='bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
-                            //     </div>
-                            // ) : 
-                            (
+                            result.length > 0 ? (
+                                <div className='text-center space-y-3'>
+                                    <div className='border-2 border-gray-900 text-base px-5 py-3'>
+                                        <p>
+                                            <span>Nama Lengkap: </span>
+                                            <span className='font-bold underline'>{user.name}</span>
+                                        </p>
+                                        <p>
+                                            <span>Jenis Kecerdasan Anda: </span>
+                                            <span className='font-bold underline'>
+                                                <span>{result[0].jenis_kecerdasan}</span>
+                                                <span> & </span>
+                                                <span>{result[1].jenis_kecerdasan}</span>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <span>Jurusan Rekomendasi: </span>
+                                            <span className='font-bold underline'>{jurusan}</span>
+                                        </p>
+                                    </div>
+                                    <button type="button" onClick={logoutFunc} className='bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm'><i className="fa-solid fa-right-from-bracket"></i> Keluar</button>
+                                </div>
+                            ) :
+                             (
                                 <button type="button" onClick={startTest} className='border-2 border-gray-900 text-sm uppercase font-bold hover:bg-gray-900 hover:text-white px-3 py-1'>
                                     <span>Mulai</span>
                                 </button>
