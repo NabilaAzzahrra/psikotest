@@ -196,8 +196,23 @@ const Register = () => {
                   required
                 >
                   <option value="">Pilih</option>
+                  <option value="Politeknik LP3I Kampus Bandung">
+                    Politeknik LP3I Kampus Bandung
+                  </option>
+                  <option value="Politeknik LP3I Kampus Pekanbaru">
+                    Politeknik LP3I Kampus Pekanbaru
+                  </option>
+                  <option value="Politeknik LP3I Kampus Padang">
+                    Politeknik LP3I Kampus Padang
+                  </option>
                   <option value="Politeknik LP3I Kampus Tasikamlaya">
                     Politeknik LP3I Kampus Tasikamlaya
+                  </option>
+                  <option value="Politeknik LP3I Kampus Cirebon">
+                    Politeknik LP3I Kampus Cirebon
+                  </option>
+                  <option value="Politeknik LP3I Kampus Langsa">
+                    Politeknik LP3I Kampus Langsa
                   </option>
                 </select>
                 <small className="text-xs text-red-600">{errorsSchool}</small>
