@@ -184,7 +184,7 @@ const Register = () => {
                   htmlFor="school"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Sekolah
+                  Politeknik LP3I Cabang
                 </label>
                 {/* <CreatableSelect type="text" id="school" styles={{ fontFamily: 'Rubik' }} options={schoolsAPI} value={selectedSchool} onChange={schoolHandle} placeholder='Sekolah' required /> */}
 
@@ -205,8 +205,8 @@ const Register = () => {
                   <option value="Politeknik LP3I Kampus Padang">
                     Politeknik LP3I Kampus Padang
                   </option>
-                  <option value="Politeknik LP3I Kampus Tasikamlaya">
-                    Politeknik LP3I Kampus Tasikamlaya
+                  <option value="Politeknik LP3I Kampus Tasikmalaya">
+                    Politeknik LP3I Kampus Tasikmalaya
                   </option>
                   <option value="Politeknik LP3I Kampus Cirebon">
                     Politeknik LP3I Kampus Cirebon
