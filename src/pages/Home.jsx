@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import Lottie from "lottie-react";
 import awanLp3i from "../assets/img/awan-lp3i.json";
 import logoLp3i from '../assets/img/logo-lp3i.png'
+
+
 import logoTagline from '../assets/img/tagline-warna.png'
 import { checkTokenExpiration } from '../middlewares/middleware';
 import { jwtDecode } from "jwt-decode";
