@@ -30,6 +30,7 @@ const Register = () => {
 
   const [schoolsAPI, setSchoolsAPI] = useState([]);
 
+  const [loading, setLoading] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
 
   const navigate = useNavigate();
@@ -87,6 +88,7 @@ const Register = () => {
 
   const registerFunc = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const data = {
       name: nameReg,
       school: schoolReg,
@@ -105,6 +107,7 @@ const Register = () => {
       .then((response) => {
         alert(response.data.message);
         navigate("/");
+        setLoading(false);
       })
       .catch((error) => {
         const errorCustom = error.response.data.message;
@@ -114,6 +117,7 @@ const Register = () => {
         setErrorsEmail(errorCustom.email);
         setErrorsPhone(errorCustom.phone);
         setErrorsPassword(errorCustom.password);
+        setLoading(false);
       });
   };
 
