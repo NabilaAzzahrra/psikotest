@@ -46,7 +46,7 @@ const Result = () => {
   const getResult = async (data) => {
     await axios
       .get(
-        `https://api.politekniklp3i-tasikmalaya.ac.id/kecerdasan/hasils/${data.id}`
+        `https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/hasils/${data.id}`
       )
       .then((response) => {
         const data = response.data;
