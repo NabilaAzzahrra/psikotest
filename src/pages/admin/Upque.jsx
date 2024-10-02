@@ -13,7 +13,7 @@ function Upque() {
   const tableRef = useRef(null);
 
   const getQuest = async () => {
-    await axios.get("https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/questions")
+    await axios.get("https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/questions")
       .then((response) => {
         console.log(response.data);
         setQuest(response.data);
@@ -25,7 +25,7 @@ function Upque() {
 
   const questSave = async (e) => {
     e.preventDefault();
-    await axios.post("https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/questions", {
+    await axios.post("https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/questions", {
       id_type: name,
       question: pertanyaan,
     })
@@ -46,7 +46,7 @@ function Upque() {
       'Apakah yakin akan di hapus?'
     )
     if (konfirmasi) {
-      await axios.delete(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/questions/${id}`)
+      await axios.delete(`https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/questions/${id}`)
         .then((response) => {
           alert(response.data.message);
           getQuest();
@@ -59,7 +59,7 @@ function Upque() {
   }
 
   const questUpdate=async(e)=>{
-    await axios.put(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/questions/${id}`, {
+    await axios.put(`https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/questions/${id}`, {
       id_type: name,
       question: pertanyaan,
     })

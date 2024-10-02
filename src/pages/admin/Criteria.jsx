@@ -11,7 +11,7 @@ function Criteria() {
   const tableRef = useRef(null);
 
   const getType = async () => {
-    await axios.get("https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/types")
+    await axios.get("https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/types")
       .then((response) => {
         console.log(response.data);
         setTypes(response.data);
@@ -23,7 +23,7 @@ function Criteria() {
 
   const typeSave = async (e) => {
     e.preventDefault();
-    await axios.post("https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/types", {
+    await axios.post("https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/types", {
       jenis_kecerdasan: name,
     })
       .then((response) => {
@@ -42,7 +42,7 @@ function Criteria() {
       'Apakah yakin akan di hapus?'
     )
     if (konfirmasi) {
-      await axios.delete(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/types/${id}`)
+      await axios.delete(`https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/types/${id}`)
         .then((response) => {
           alert(response.data.message);
           getType();
@@ -55,7 +55,7 @@ function Criteria() {
   }
 
   const typeUpdate=async(e)=>{
-    await axios.put(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/kecerdasan/types/${id}`, {
+    await axios.put(`https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/types/${id}`, {
       name: name,
     })
       .then((response) => {
