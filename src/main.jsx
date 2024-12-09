@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './output.css'
+import './index.css'
 import './assets/css/custom.css'
 import {
   createBrowserRouter,
@@ -12,6 +12,7 @@ import Answer from './pages/admin/Answer.jsx'
 import Register from './pages/auth/Register.jsx'
 import Login from './pages/auth/Login.jsx'
 import Question from './pages/Question.jsx'
+
 
 const router = createBrowserRouter([
   {
