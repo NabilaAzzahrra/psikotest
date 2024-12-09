@@ -47,7 +47,7 @@ function Question() {
     };
 
     useEffect(() => {
-        const bucket = localStorage.getItem('bucket');
+        const bucket = localStorage.getItem('LP3IPSY:bucket');
         if (bucket) {
             const parsedData = JSON.parse(bucket);
             if (parsedData.length > 0) {
@@ -58,7 +58,7 @@ function Question() {
     }, [questions]);
 
     const bucketQuestion = () => {
-        let bucket = localStorage.getItem('bucket') || '[]';
+        let bucket = localStorage.getItem('LP3IPSY:bucket') || '[]';
         bucket = JSON.parse(bucket);
         if (bucket.length > 0) {
             const lastData = bucket[bucket.length - 1];
@@ -73,7 +73,7 @@ function Question() {
     const handleNextQuestion = (answer) => {
         setActive(parseInt(answer));
         setLoading(true);
-        let bucket = localStorage.getItem('bucket') || '[]';
+        let bucket = localStorage.getItem('LP3IPSY:bucket') || '[]';
         const questionLength = questions.length;
         bucket = JSON.parse(bucket);
         if (currentQuestion + 1 === questionLength) {
@@ -86,7 +86,7 @@ function Question() {
                 user: user.id
             };
             bucket.push(data);
-            localStorage.setItem('bucket', JSON.stringify(bucket));
+            localStorage.setItem('LP3IPSY:bucket', JSON.stringify(bucket));
             setSelectedOption(null);
             setCurrentQuestion(currentQuestion + 1);
             setTimeout(() => {
@@ -97,7 +97,7 @@ function Question() {
     };
 
     const handleFinish = async (answer) => {
-        let bucket = localStorage.getItem('bucket') || '[]';
+        let bucket = localStorage.getItem('LP3IPSY:bucket') || '[]';
         bucket = JSON.parse(bucket);
         let data = {
             question: currentQuestion + 1,
@@ -106,12 +106,12 @@ function Question() {
             user: user.id
         };
         bucket.push(data);
-        localStorage.setItem('bucket', JSON.stringify(bucket));
+        localStorage.setItem('LP3IPSY:bucket', JSON.stringify(bucket));
         await axios.post('https://psikotest-kecerdasan-backend.politekniklp3i-tasikmalaya.ac.id/tests', {
             answers: bucket,
         })
             .then(() => {
-                localStorage.removeItem('bucket');
+                localStorage.removeItem('LP3IPSY:bucket');
                 setTimeout(() => {
                     setLoading(false);
                     setActive(0);

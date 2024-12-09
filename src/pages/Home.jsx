@@ -39,7 +39,7 @@ const Home = () => {
 
     const logoutFunc = () => {
         localStorage.removeItem('LP3IPSY:token');
-        localStorage.removeItem('bucket');
+        localStorage.removeItem('LP3IPSY:bucket');
         navigate('/');
     }
 
